@@ -21,3 +21,6 @@ pnpm-debug.log*
 
 package-lock.json
 pnpm-lock.yaml
+
+public/api/config
+public/api/vendor
