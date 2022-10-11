@@ -1,0 +1,46 @@
+---
+import { Icon } from "astro-icon";
+---
+
+<section class="relative" id="contact">
+	<div class="max-w-6xl px-4 py-40 mx-auto sm:px-6">
+		<div class="py-12 md:py-20">
+			<div class="max-w-3xl p-6 mx-auto text-center rounded-md shadow-xl dark:shadow-none">
+				<h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-4xl leading-tighter font-heading">Let's talk!</h2>
+				<p class="text-xl text-gray-600 dark:text-slate-400">
+					Don't wait more time. Talk to us. We'll contact you in a moment and begin the process to get you online.
+				</p>
+				<form
+					class="flex flex-col items-center max-w-lg px-6 py-3 m-auto mt-6 text-left"
+					action="http://localhost/web/public/api/mail.php"
+					method="POST"
+					id="contact-form"
+				>
+					<div class="w-full my-2 form-group">
+						<label for="name" class="form-label">Name</label>
+						<input type="text" name="name" class="w-full p-2 border rounded" placeholder="Name" value="" />
+					</div>
+					<div class="w-full my-2 form-group">
+						<label for="email" class="form-label">Mail</label>
+						<input type="email" name="email" class="w-full p-2 border rounded" placeholder="Mail" value="" />
+					</div>
+					<div class="w-full my-2 form-group">
+						<label for="message" class="form-label">Message</label>
+						<textarea rows="6" name="message" class="w-full p-2 border rounded" placeholder=""></textarea>
+					</div>
+
+					<div class="text-center form-group">
+						<button
+							class="px-12 py-4 font-medium text-white rounded bg-stone-800 hover:bg-stone-700 focus:bg-stone-700"
+							type="submit"
+							role="button"
+							id="contact-form-btn"
+						>
+							<Icon name="tabler:send" class="" /> Send
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

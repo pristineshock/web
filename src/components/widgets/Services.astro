@@ -1,0 +1,47 @@
+---
+import { Icon } from "astro-icon";
+
+const items = [
+	{
+		title: "Mobile first Design",
+		description: "We build our designs for mobile first. There will be no device that our webs won't support.",
+		icon: "flat-color-icons:smartphone-tablet",
+	},
+	{
+		title: "Optimized designs",
+		description: "Optimization is primordial for us. Our sites will have an outstanding score in performance and load times.",
+		icon: "flat-color-icons:expired",
+	},
+	{
+		title: "Pricing",
+		description: "We know price is important. We give facilities for everyone to have their site on the web.",
+		icon: "flat-color-icons:calculator",
+	},
+];
+---
+
+<section class="relative pt-20" id="services">
+	<div class="absolute inset-0 mt-20 mb-32 pointer-events-none bg-primary-100 dark:bg-slate-800" aria-hidden="true"></div>
+	<div class="relative max-w-6xl px-4 mx-auto sm:px-6">
+		<div class="py-4 pt-8 sm:py-6 lg:py-8 lg:pt-12">
+			<div class="mb-8 text-center">
+				<p class="text-base font-semibold tracking-wide uppercase text-primary-700 dark:text-primary-200">What we do</p>
+				<h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-5xl leading-tighter font-heading">Services</h2>
+			</div>
+			<div class="grid items-start gap-6 my-12 md:grid-cols-2 lg:grid-cols-3 dark:text-white">
+				{
+					items.map(({ title, description, icon }) => (
+						<div class="relative flex flex-col p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
+							<div class="flex items-center mb-4">
+								<Icon name={icon} class="w-12 h-12" />
+
+								<div class="ml-4 text-xl font-bold">{title}</div>
+							</div>
+							<p class="text-gray-500 dark:text-gray-400 text-md">{description}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>
