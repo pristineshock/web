@@ -1,47 +1,100 @@
 ---
 import { Icon } from "astro-icon";
 
+const plans = [
+  {
+    title: "Hosting",
+    description: ["Hosting in our servers", "Domain included in the price", "Customer support"],
+    price: "$30",
+  },
+  {
+    title: "Standard",
+    description: ["All in Hosting plan included", "Custom web design and development", "5 custom pages adapted to your needs"],
+    price: "$100",
+  },
+  {
+    title: "Blog",
+    description: ["Hosting in our servers", "Domain included in the price", "Customer support"],
+    price: "$300",
+  },
+];
+
 const items = [
-	{
-		title: "Mobile first Design",
-		description: "We build our designs for mobile first. There will be no device that our webs won't support.",
-		icon: "flat-color-icons:smartphone-tablet",
-	},
-	{
-		title: "Optimized designs",
-		description: "Optimization is primordial for us. Our sites will have an outstanding score in performance and load times.",
-		icon: "flat-color-icons:expired",
-	},
-	{
-		title: "Pricing",
-		description: "We know price is important. We give facilities for everyone to have their site on the web.",
-		icon: "flat-color-icons:calculator",
-	},
+  {
+    title: "Design and Development",
+    description: "Our work includes over 40 hours of work in design and development our standard plan.",
+    icon: "noto:bookmark-tabs",
+  },
+  {
+    title: "Mobile first Design",
+    description: "We build our designs for mobile first. There will be no device that our webs won't support.",
+    icon: "flat-color-icons:smartphone-tablet",
+  },
+  {
+    title: "Optimized designs",
+    description: "Optimization is primordial for us. Our sites will have an outstanding score in performance and load times.",
+    icon: "flat-color-icons:electro-devices",
+  },
+  {
+    title: "Pricing",
+    description: "We know price is important. We give facilities for everyone to have their site on the web.",
+    icon: "flat-color-icons:calculator",
+  },
+  {
+    title: "24/7 Customer Service",
+    description: "Anytime you have a problem or a question, just send us a message and we will get back to you as soon as possible.",
+    icon: "noto:eight-oclock",
+  },
+  {
+    title: "Lifetime Support",
+    description: "If you have your site hosted with us, we will take care forever of it. No more problems with your website.",
+    icon: "flat-color-icons:support",
+  },
 ];
 ---
 
 <section class="relative pt-20" id="services">
-	<div class="absolute inset-0 mt-20 mb-32 pointer-events-none bg-primary-100 dark:bg-slate-800" aria-hidden="true"></div>
-	<div class="relative max-w-6xl px-4 mx-auto sm:px-6">
-		<div class="py-4 pt-8 sm:py-6 lg:py-8 lg:pt-12">
-			<div class="mb-8 text-center">
-				<p class="text-base font-semibold tracking-wide uppercase text-primary-700 dark:text-primary-200">What we do</p>
-				<h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-5xl leading-tighter font-heading">Services</h2>
-			</div>
-			<div class="grid items-start gap-6 my-12 md:grid-cols-2 lg:grid-cols-3 dark:text-white">
-				{
-					items.map(({ title, description, icon }) => (
-						<div class="relative flex flex-col p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
-							<div class="flex items-center mb-4">
-								<Icon name={icon} class="w-12 h-12" />
+  <div class="absolute inset-0 mt-20 mb-32 pointer-events-none bg-primary-100 dark:bg-slate-800" aria-hidden="true"></div>
+  <div class="relative max-w-6xl px-4 mx-auto sm:px-6">
+    <div class="py-4 pt-8 sm:py-6 lg:py-8 lg:pt-12">
+      <div class="mb-8 text-center">
+        <p class="text-base font-semibold tracking-wide uppercase text-primary-700 dark:text-primary-200">What we do</p>
+        <h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-5xl leading-tighter font-heading">Services</h2>
+      </div>
+      <div class="grid items-start gap-6 my-12 lg:grid-cols-3 dark:text-white">
+        {
+          plans.map(({ title, description, price }) => (
+            <div class="relative flex flex-col p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
+              <h2 class="mb-4 text-3xl font-bold text-center">{title}</h2>
+              <h2 class="my-4 text-4xl font-bold text-center text-primary-700 dark:text-primary-500">{price}<span class="text-sm"> /mo</span></h2>
+              <div class="flex flex-col">
+                {description.map((item) => (
+                  <p class="flex items-center justify-start py-2 text-gray-500 dark:text-gray-300 text-md">
+                    <Icon name="entypo:dot-single" class="w-8 h-8" />
+                    {item}
+                  </p>
+                  <hr class="w-3/4 mx-auto dark:border-gray-700">
+                ))}
+              </div>
+              <a href="#contact" class="mt-12 mb-4 text-xl font-bold text-black btn bg-primary-500 hover:bg-primary-600">Contact Us!</a>
+            </div>
+          ))
+        }
+      </div>
+      <div class="grid items-start gap-6 my-12 md:grid-cols-2 lg:grid-cols-3 dark:text-white">
+        {
+          items.map(({ title, description, icon }) => (
+            <div class="relative flex flex-col p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
+              <div class="flex items-center mb-4">
+                <Icon name={icon} class="w-12 h-12" />
 
-								<div class="ml-4 text-xl font-bold">{title}</div>
-							</div>
-							<p class="text-gray-500 dark:text-gray-400 text-md">{description}</p>
-						</div>
-					))
-				}
-			</div>
-		</div>
-	</div>
+                <div class="ml-4 text-xl font-bold">{title}</div>
+              </div>
+              <p class="text-gray-500 dark:text-gray-400 text-md">{description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
 </section>
