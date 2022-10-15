@@ -4,33 +4,33 @@ import Picture from "~/components/core/Picture.astro";
 ---
 
 <section>
-	<div class="z-10 max-w-5xl px-4 mx-auto sm:px-6">
-		<div class="flex flex-wrap py-12 md:flex-nowrap md:py-20">
-			<div class="pb-10 md:pb-16">
-				<h1 class="text-4xl md:text-[3.50rem] font-bold leading-tight tracking-tighter mb-4 font-heading">
-					Web Design and Development for small business.
-				</h1>
-				<div class="max-w-xl">
-					<p class="mb-8 text-xl text-gray-600 dark:text-slate-400">
-						Custom web building for anyone one the web. We offer the best treament and the most attention to detail for accesible prices.
-					</p>
-					<div class="flex gap-4 max-w-none flex-nowrap">
-						<div class="flex w-full sm:w-auto">
-							<a
-								class="w-full text-white border btn border-primary-600 bg-primary-600 hover:bg-primary-800 hover:border-primary-800 sm:mb-0"
-								href="#contact"
-							>
-								<Icon name="ic:round-email" class="w-5 h-5 mr-2 -ml-1.5" /> Contact Us
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="relative max-w-3xl m-auto mb-8">
-					<Picture src={import("~/assets/images/hero.png")} class="w-full mx-auto" widths={[768, 400]} alt="Hero Image" aspectRatio="10:10" />
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="z-10 max-w-5xl px-4 mx-auto sm:px-6">
+    <div class="flex flex-wrap py-12 md:flex-nowrap md:py-20">
+      <div class="pb-10 md:pb-16">
+        <h1 class="text-4xl md:text-[3.50rem] font-bold leading-tight tracking-tighter mb-4 font-heading">
+          Web Design and Development for small business.
+        </h1>
+        <div class="max-w-xl">
+          <p class="mb-8 text-xl text-gray-600 dark:text-slate-400">
+            Custom web building for anyone one the web. We offer the best treament and the most attention to detail for accesible prices.
+          </p>
+          <div class="flex gap-4 max-w-none flex-nowrap">
+            <div class="flex w-full sm:w-auto">
+              <a
+                class="w-full text-black border btn border-primary-500 bg-primary-500 hover:bg-primary-600 hover:border-primary-600 sm:mb-0"
+                href="#contact"
+              >
+                <Icon name="ic:round-email" class="w-5 h-5 mr-2 -ml-1.5" /> Contact Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="relative max-w-3xl m-auto mb-8">
+          <Picture src={import("~/assets/images/hero.png")} class="w-full mx-auto" widths={[768, 400]} alt="Hero Image" aspectRatio="10:10" />
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
