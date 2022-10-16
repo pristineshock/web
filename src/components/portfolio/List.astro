@@ -1,0 +1,15 @@
+---
+import Item from "~/components/portfolio/ListItem.astro";
+
+const { works } = Astro.props;
+---
+
+<ul class="grid md:grid-cols-2">
+  {
+    works.map((work) => (
+      <li class="mb-10 md:mb-16">
+        <Item work={work} />
+      </li>
+    ))
+  }
+</ul>

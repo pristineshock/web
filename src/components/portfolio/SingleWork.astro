@@ -1,0 +1,31 @@
+---
+import { Image } from "@astrojs/image/components";
+import { getPortfolioPermalink } from "~/utils/permalinks.js";
+
+const { work } = Astro.props;
+---
+
+<section class="py-8 mx-auto sm:py-16 lg:py-20">
+  <article>
+    <header>
+      <h1 class="max-w-5xl px-4 mx-auto mb-8 text-4xl font-bold tracking-tighter sm:px-6 md:text-5xl leading-tighter font-heading">
+        {work.title}
+      </h1>
+    </header>
+    <div
+      class="container flex max-w-5xl gap-4 px-6 mx-auto mt-8 prose dark:prose-invert dark:prose-headings:text-slate-300 prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary-600 dark:prose-a:text-primary-400 prose-img:shadow-lg"
+    >
+      {
+        work.image && (
+          <Image src={work.image} class="max-w-sm mx-auto mt-12 mb-6 bg-gray-400 dark:bg-slate-700" alt={work.description} aspectRatio="1" />
+        )
+      }
+      <div class="ml-6">
+        <Fragment set:html={work.body} />
+      </div>
+    </div>
+    <footer class="container max-w-3xl px-8 mx-auto mt-8 text-center sm:px-6">
+      <a href={getPortfolioPermalink()} class="text-black transition btn bg-primary-500 hover:bg-primary-600">Go back to the portfolio</a>
+    </footer>
+  </article>
+</section>
