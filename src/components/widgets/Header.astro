@@ -3,7 +3,7 @@ import Logo from "~/components/atoms/Logo.astro";
 import ToggleTheme from "~/components/core/ToggleTheme.astro";
 import ToggleMenu from "~/components/core/ToggleMenu.astro";
 
-import { getHomePermalink, getPortfolioPermalink } from "~/utils/permalinks";
+import { getHomePermalink, getPortfolioPermalink, getContactPermalink } from "~/utils/permalinks";
 ---
 
 <header
@@ -26,14 +26,15 @@ import { getHomePermalink, getPortfolioPermalink } from "~/utils/permalinks";
     >
       <ul class="flex flex-col w-full pt-8 text-xl md:pt-0 md:flex-row md:self-center collapse md:w-auto collapsed md:text-base">
         <li>
-          <a class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white" href="#top"
-            >Home</a
+          <a
+            class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
+            href={getHomePermalink()}>Home</a
           >
         </li>
         <li>
           <a
             class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
-            href="#services"
+            href={getHomePermalink() + "#services"}
             >Services
           </a>
         </li>
@@ -47,7 +48,7 @@ import { getHomePermalink, getPortfolioPermalink } from "~/utils/permalinks";
         <li>
           <a
             class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
-            href="#contact"
+            href={getContactPermalink()}
             >Contact
           </a>
         </li>

@@ -1,0 +1,17 @@
+---
+import { SITE } from "~/config.mjs";
+import { getCanonical, getContactPermalink } from "~/utils/permalinks";
+import Layout from "~/layouts/PageLayout.astro";
+
+import ContactForm from "~/components/widgets/Form.svelte";
+
+const meta = {
+  title: SITE.title,
+  description: SITE.description,
+  canonical: getCanonical(getContactPermalink()),
+};
+---
+
+<Layout {meta}>
+  <ContactForm client:load />
+</Layout>
