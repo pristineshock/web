@@ -56,9 +56,9 @@
 </script>
 
 <section class="relative" id="contact">
-  <div class="max-w-6xl px-4 py-40 mx-auto sm:px-6">
-    <div class="py-12 md:py-20">
-      <div class="max-w-3xl p-6 mx-auto text-center rounded-md shadow-xl dark:shadow-none">
+  <div class="max-w-6xl px-4 mx-auto sm:px-6">
+    <div class="py-12">
+      <div class="max-w-3xl p-6 mx-auto text-center rounded-md shadow-lg dark:shadow-slate-800">
         <h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-4xl leading-tighter font-heading">Let's talk!</h2>
         <p class="text-xl text-gray-600 dark:text-slate-400">
           Don't wait more time. Talk to us. We'll contact you in a moment and begin the process to get you online.
