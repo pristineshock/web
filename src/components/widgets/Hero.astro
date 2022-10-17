@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon";
 import Picture from "~/components/core/Picture.astro";
+import { getContactPermalink } from "~/utils/permalinks";
 ---
 
 <section>
@@ -18,7 +19,7 @@ import Picture from "~/components/core/Picture.astro";
             <div class="flex w-full sm:w-auto">
               <a
                 class="w-full text-black border btn border-primary-500 bg-primary-500 hover:bg-primary-600 hover:border-primary-600 sm:mb-0"
-                href="#contact"
+                href={getContactPermalink()}
               >
                 <Icon name="ic:round-email" class="w-5 h-5 mr-2 -ml-1.5" /> Contact Us
               </a>
