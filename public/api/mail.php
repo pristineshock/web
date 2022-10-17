@@ -11,6 +11,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
+$recaptcha = new \ReCaptcha\ReCaptcha(GOOGLE_CAPTCHA_PRIVATE);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   $return = null;
@@ -20,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = htmlspecialchars($_REQUEST["name"]);
 
     if (strlen($name) <= 2) {
-      $return["nameErr"] = "Name must be at least 3 characters long.";
+      $return["nameErr"] = "Name must be at least 3 characters long";
     }
   } else $return["nameErr"] = "Please, complete this field";
 
@@ -38,14 +40,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = htmlspecialchars($_REQUEST["message"]);
 
     if (strlen($message) <= 20) {
-      $return["messageErr"] = "Message must be at least 20 characters long.";
+      $return["messageErr"] = "Message must be at least 20 characters long";
     }
   } else $return["messageErr"] = "Please, complete this field";
 
+  // Captcha Sanitation and Validation
+  if (isset($_REQUEST['recaptcha'])) {
+    $captcha = htmlspecialchars($_REQUEST["recaptcha"]);
+
+    $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
+      ->verify($captcha, $_SERVER['REMOTE_ADDR']);
+    if ($resp->isSuccess()) {
+      // Verified!
+    } else {
+      $return["captchaErr"] = $resp->getErrorCodes();
+    }
+  } else $return["captchaErr"] = "Please, complete the captcha";
+
   // Check if there are errors
-  if (!empty($return["nameErr"]) || !empty($return["mailErr"]) || !empty($return["messageErr"])) {
+  if (!empty($return["nameErr"]) || !empty($return["mailErr"]) || !empty($return["messageErr"]) || !empty($return["captchaErr"])) {
     $return["status"] = "failed";
-    $return["message"] = "Please, check all fields for errors.";
+    $return["message"] = "Please, check all fields for errors";
     echo json_encode($return);
     return;
   }

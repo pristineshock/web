@@ -10,9 +10,10 @@ export const SITE = {
 
   googleAnalyticsId: false, // or "G-XXXXXXXXXX",
   googleSiteVerificationId: "",
+  googleCaptchaPublicKey: "6LfOFpsUAAAAAEY75LBO7BvwkefCPmYS5Gtca9oB",
 
   // SOCIAL LINKS
-  socialLinks: true,
+  socialLinks: false,
   github: "#",
   linkedin: "#",
   instagram: "#",

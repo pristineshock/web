@@ -1,4 +1,8 @@
 <script>
+  import { SITE } from "~/config.mjs";
+  import { onMount } from "svelte";
+
+  var recaptcha_response = "";
   let botField = "";
   let name = "";
   let email = "";
@@ -7,21 +11,31 @@
   let resNameErr = false;
   let resMailErr = false;
   let resMsgErr = false;
+  let resCaptchaErr = false;
   $: resSuccess = false;
   $: resMsg = null;
   $: resStatus = null;
-  $: submitting = false;
+  $: submitting = true;
   $: loading = false;
 
+  const toggleCaptcha = (token) => {
+    recaptcha_response = token;
+    submitting = false;
+  };
+
+  onMount(() => {
+    window.toggleCaptcha = toggleCaptcha;
+  });
+
   const handleSubmit = async () => {
-    console.log({ email, name, message });
     try {
       submitting = true;
       var formData = new FormData();
       formData.append("name", name);
       formData.append("mail", email);
       formData.append("message", message);
-      const response = await fetch(`/api/mail.php`, {
+      formData.append("recaptcha", recaptcha_response);
+      const response = await fetch(SITE.origin + `/api/mail.php`, {
         method: "POST",
         body: formData,
       });
@@ -39,23 +53,17 @@
       else resMailErr = null;
       if (parsedJson.messageErr) resMsgErr = parsedJson.messageErr;
       else resMsgErr = null;
-    } catch (error) {
-      let parsedJson = await response.json();
-      console.log(parsedJson);
-      submitting = false;
-      resStatus = parsedJson.status;
-      resMsg = parsedJson.message;
-      if (parsedJson.nameErr) resNameErr = parsedJson.nameErr;
-      else resNameErr = null;
-      if (parsedJson.mailErr) resMailErr = parsedJson.mailErr;
-      else resMailErr = null;
-      if (parsedJson.messageErr) resMsgErr = parsedJson.messageErr;
+      if (parsedJson.captchaErr) resCaptchaErr = parsedJson.captchaErr;
       else resMsgErr = null;
+    } catch (error) {
+      console.log(error.message);
+      submitting = false;
     }
   };
 </script>
 
 <section class="relative" id="contact">
+  <script src="//www.google.com/recaptcha/api.js"></script>
   <div class="max-w-6xl px-4 mx-auto sm:px-6">
     <div class="py-12">
       <div class="max-w-3xl p-6 mx-auto text-center rounded-md shadow-lg dark:shadow-slate-800">
@@ -72,7 +80,7 @@
         {/if}
         {#if resSuccess && !loading}
           <div class="flex items-center justify-center py-40 mx-auto">
-            <p class="">
+            <p class="text-2xl">
               {resMsg}
             </p>
           </div>
@@ -125,20 +133,27 @@
                 <p class="text-sm font-bold text-red-600">{resMsgErr}</p>
               {/if}
             </div>
+            <div class="mx-auto my-4">
+              <div class="g-recaptcha" data-sitekey={SITE.googleCaptchaPublicKey} data-callback="toggleCaptcha" />
+              {#if resCaptchaErr}
+                <p class="text-sm font-bold text-red-600">{resCaptchaErr}</p>
+              {/if}
+            </div>
             {#if resStatus == "failed"}
               <p class="py-3 text-sm font-bold text-red-600">
                 {resMsg}
               </p>
             {/if}
-            <div class="w-full my-2 text-center">
-              <button
-                class="text-lg text-black border btn border-primary-500 bg-primary-500 hover:bg-primary-600 hover:border-primary-600"
-                type="submit"
-                disabled={submitting}
-              >
-                Send</button
-              >
-            </div>
+            {#if !submitting}
+              <div class="w-full my-2 text-center">
+                <button
+                  class="text-lg text-black border btn border-primary-500 bg-primary-500 hover:bg-primary-600 hover:border-primary-600"
+                  type="submit"
+                >
+                  Send</button
+                >
+              </div>
+            {/if}
           </form>
         {/if}
       </div>
