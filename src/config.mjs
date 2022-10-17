@@ -3,6 +3,7 @@ export const SITE = {
 
   origin: "https://www.pristineshock.com",
   basePathname: "/",
+  contactPathname: "contact",
 
   title: "PristineShock",
   description: "We are a web design and development studio, working with small companies to position them on the web.",
@@ -18,27 +19,36 @@ export const SITE = {
   twitter: "#",
 };
 
+export const PORTFOLIO = {
+  disabled: false,
+  worksPerPage: 8,
+
+  portfolio: {
+    pathname: "portfolio",
+  },
+};
+
 export const BLOG = {
-  disabled: true,
+  disabled: false,
   postsPerPage: 4,
 
   blog: {
     disabled: false,
-    pathname: "blog", // blog main path, you can change this to "articles" (/articles)
+    pathname: "blog",
   },
 
   post: {
     disabled: false,
-    pathname: "", // empty for /some-post, value for /pathname/some-post
+    pathname: "",
   },
 
   category: {
     disabled: false,
-    pathname: "category", // set empty to change from /category/some-category to /some-category
+    pathname: "category",
   },
 
   tag: {
     disabled: false,
-    pathname: "tag", // set empty to change from /tag/some-tag to /some-tag
+    pathname: "tag",
   },
 };

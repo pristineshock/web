@@ -17,6 +17,7 @@ const basePathname = trimSlash(SITE.basePathname);
 
 export const cleanSlug = (text) => slugify(trimSlash(text));
 
+export const CONTACT_BASE = cleanSlug(SITE.contactPathname);
 export const PORTFOLIO_BASE = cleanSlug(PORTFOLIO?.portfolio?.pathname);
 export const BLOG_BASE = cleanSlug(BLOG?.blog?.pathname);
 export const POST_BASE = cleanSlug(BLOG?.post?.pathname);
@@ -31,6 +32,9 @@ export const getPermalink = (slug = "", type = "page") => {
   const _slug = cleanSlug(slug);
 
   switch (type) {
+    case "contact":
+      return createPath(basePathname, CONTACT_BASE, _slug);
+
     case "category":
       return createPath(basePathname, CATEGORY_BASE, _slug);
 
@@ -50,6 +54,7 @@ export const getPermalink = (slug = "", type = "page") => {
 };
 
 /** */
+export const getContactPermalink = () => getPermalink(CONTACT_BASE);
 export const getPortfolioPermalink = () => getPermalink(PORTFOLIO_BASE);
 export const getBlogPermalink = () => getPermalink(BLOG_BASE);
 
