@@ -13,11 +13,16 @@ const { work } = Astro.props;
       </h1>
     </header>
     <div
-      class="container flex max-w-5xl gap-4 px-6 mx-auto mt-8 prose dark:prose-invert dark:prose-headings:text-slate-300 prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary-600 dark:prose-a:text-primary-400 prose-img:shadow-lg"
+      class="container max-w-5xl gap-4 px-6 mx-auto mt-8 prose md:flex dark:prose-invert dark:prose-headings:text-slate-300 prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary-600 dark:prose-a:text-primary-400 prose-img:shadow-lg"
     >
       {
         work.image && (
-          <Image src={work.image} class="max-w-sm mx-auto mt-12 mb-6 bg-gray-400 dark:bg-slate-700" alt={work.description} aspectRatio="1" />
+          <Image
+            src={work.image}
+            class="max-w-xs mx-auto mt-12 mb-6 bg-gray-400 md:max-w-sm dark:bg-slate-700"
+            alt={work.description}
+            aspectRatio="1"
+          />
         )
       }
       <div class="ml-6">
