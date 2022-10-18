@@ -1,11 +1,13 @@
 ---
 pubDate: "Oct 12 2022"
 title: "FM Zurich"
-description: "Radio FM website with rss feeds."
+type: "Website"
+description: "Radio FM website with news feeds."
 location: "Entre Rios, Argentina"
 industry: "Media, Radio communication"
 url: "http://www.fmzurich.com/"
 image: "~/assets/images/portfolio/fmzurich.png"
+imageSocial: "~/assets/images/portfolio/fmzurichSocial.jpg"
 ---
 ## Problems brought by the people of FM Zurich
 
