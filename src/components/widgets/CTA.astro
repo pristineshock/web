@@ -1,16 +1,28 @@
 ---
 import { getHomePermalink } from "~/utils/permalinks.js";
+import Picture from "~/components/core/Picture.astro";
 ---
 
-<section id="footer-cta" class="w-full bg-slate-300 dark:bg-slate-800 mb-10">
-  <div class="container mx-auto p-12 flex justify-center items-center">
-    <div class="p-6 text-right basis-1/2">
-      <h3 class="text-xl tracking-tight font-bold">Still some doubts? Talk to us!</h3>
-      <h3 class="text-xl tracking-tight font-medium">No startup costs, no upfront investment.</h3>
-      <h3 class="text-xl tracking-tight font-medium">You pay nothing if you don't love your design.</h3>
+<section id="footer-cta" class="relative w-full mb-10 max-h-[350px] bg-[#8d8c7b] dark:bg-slate-800 overflow-hidden">
+  <div class="">
+    <Picture
+      src={import("~/assets/images/cta_background.png")}
+      widths={[1440, 768]}
+      class="w-full mx-auto absolute min-h-[250px]"
+      alt="cta background"
+      aspectRatio="1"
+    />
+  </div>
+  <div class="container z-10 items-center justify-center py-6 mx-auto md:flex md:p-16">
+    <div class="p-6 text-center md:text-right md:basis-7/12">
+      <h3 class="font-bold tracking-tight md:text-xl">Still some doubts? Talk to us!</h3>
+      <h3 class="font-medium tracking-tight md:text-xl">No startup costs, no upfront investment.</h3>
+      <h3 class="font-medium tracking-tight md:text-xl">You pay nothing if you don't like your design.</h3>
     </div>
-    <div class="basis-1/2">
-      <a href={getHomePermalink()} class="btn bg-primary-500 hover:bg-primary-600 text-black px-12 py-3 text-2xl">Get Started</a>
+    <div class="text-center md:basis-5/12">
+      <a href={getHomePermalink()} class="px-12 py-2 mb-6 text-xl text-black md:py-3 md:text-2xl btn bg-primary-500 md:m-0 hover:bg-primary-600">
+        Write us!
+      </a>
     </div>
   </div>
 </section>
