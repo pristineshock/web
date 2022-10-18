@@ -14,12 +14,14 @@ const getNormalizedwork = async (work) => {
     slug: frontmatter.slug || ID,
 
     title: frontmatter.title,
+    type: frontmatter.type,
     description: frontmatter.description,
     industry: frontmatter.industry,
     location: frontmatter.location,
     url: frontmatter.url,
     body: compiledContent(),
     image: frontmatter.image,
+    imageSocial: frontmatter.imageSocial,
 
     excerpt: frontmatter.excerpt,
     authors: frontmatter.authors,

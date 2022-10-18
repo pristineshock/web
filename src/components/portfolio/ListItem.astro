@@ -6,7 +6,7 @@ import { findImage } from "~/utils/images";
 
 const { work } = Astro.props;
 
-const image = await findImage(work.image);
+const image = await findImage(work.imageSocial);
 ---
 
 <article class="max-w-md p-8 mx-auto">
@@ -27,7 +27,8 @@ const image = await findImage(work.image);
       class="relative block group"
       href={getPermalink(work.slug, "portfolio")}
     >
-    </a><header>
+    </a>
+    <header>
       <a class="relative block group" href={getPermalink(work.slug, "portfolio")}> </a><h2
         class="mb-2 text-xl font-bold leading-snug sm:text-2xl font-heading"
       >
@@ -40,7 +41,10 @@ const image = await findImage(work.image);
       </h2>
     </header>
     <p class="flex-grow text-md sm:text-lg">
-      {work.excerpt || work.description}
+      {work.type}
+    </p>
+    <p class="flex-grow text-md sm:text-lg">
+      {work.description}
     </p>
     <footer class="mt-4 text-center">
       <a href={getPermalink(work.slug, "portfolio")} class="text-black transition btn bg-primary-500 hover:bg-primary-600">View</a>
