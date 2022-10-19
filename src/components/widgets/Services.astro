@@ -1,21 +1,47 @@
 ---
 import { Icon } from "astro-icon";
+import { getContactPermalink } from "~/utils/permalinks";
 
-const plans = [
+const hosting = [
   {
     title: "Hosting",
-    description: ["Hosting in our servers", "Domain included in the price", "Customer support"],
+    description: ["Hosting in our servers", "Domain included in the price", "24/7 Customer support", "5k visits per month"],
     price: "$30",
   },
   {
-    title: "Standard",
-    description: ["All in Hosting plan included", "Custom web design and development", "5 custom pages adapted to your needs"],
+    title: "Personal",
+    description: ["All in Hosting plan included", "Custom web design and dev", "Single landing page", "Great for CV's or Landing Pages", "10k visits per month"],
     price: "$100",
   },
   {
-    title: "Blog",
-    description: ["Hosting in our servers", "Domain included in the price", "Customer support"],
+    title: "Business",
+    description: ["All in the Standard plan included", "1 blog post per month", "CMS for you to manage", "20k visits per month", "Additionals blog posts"],
     price: "$300",
+  },
+];
+
+const design = [
+  {
+    title: "Logo",
+    description: ["Up to 2 Revisions", "Light and Dark themes", "Color palettes", "Included with Business Plans", "Copyright Ownership"],
+    price: "$100",
+  },
+  {
+    title: "Branding",
+    description: ["Up to 5 Revisions", "Includes logo design", "Business Card", "Letterhead & Envelope Designs", "Copyright Ownership"],
+    price: "$1500",
+  },
+  {
+    title: "Premium Branding",
+    description: ["Up to 5 Revisions per item", "Includes all in brading package", "Flyer / Poster / Brochure", "Compliments slip", "Board / Hoarder design", "Social Media Kit", "Copyright Ownership"],
+    price: "$3500",
+  },
+];
+
+const custom = [
+  {
+    title: "Make your own package",
+    description: ["Any package or service you want", "Special prices", "Fast response", "Talk to us and tell us what you need"],
   },
 ];
 
@@ -59,12 +85,12 @@ const items = [
     <div class="py-4 pt-8 sm:py-6 lg:py-8 lg:pt-12">
       <div class="mb-8 text-center">
         <p class="text-base font-semibold tracking-wide uppercase text-primary-700 dark:text-primary-200">What we do</p>
-        <h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-5xl leading-tighter font-heading">Services</h2>
+        <h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-5xl leading-tighter font-heading">Hosting</h2>
       </div>
-      <div class="grid items-start gap-6 my-12 lg:grid-cols-3 dark:text-white">
+      <div class="grid items-start gap-6 my-12 justify-items-center lg:grid-cols-3 dark:text-white">
         {
-          plans.map(({ title, description, price }) => (
-            <div class="relative flex flex-col p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
+          hosting.map(({ title, description, price }) => (
+            <div class="relative flex flex-col w-full max-w-sm p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
               <h2 class="mb-4 text-3xl font-bold text-center">{title}</h2>
               <h2 class="my-4 text-4xl font-bold text-center text-primary-700 dark:text-primary-500">{price}<span class="text-sm"> /mo</span></h2>
               <div class="flex flex-col">
@@ -76,12 +102,12 @@ const items = [
                   <hr class="w-3/4 mx-auto dark:border-gray-700">
                 ))}
               </div>
-              <a href="#contact" class="mt-12 mb-4 text-xl font-bold text-black btn bg-primary-500 hover:bg-primary-600">Contact Us!</a>
+              <a href={getContactPermalink()} class="mt-12 mb-4 text-xl font-bold text-black btn bg-primary-500 hover:bg-primary-600">Contact Us!</a>
             </div>
           ))
         }
       </div>
-      <div class="grid items-start gap-6 my-12 md:grid-cols-2 lg:grid-cols-3 dark:text-white">
+      <div class="grid gap-6 mt-12 mb-24 md:grid-cols-2 lg:grid-cols-3 dark:text-white">
         {
           items.map(({ title, description, icon }) => (
             <div class="relative flex flex-col p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
@@ -95,6 +121,55 @@ const items = [
           ))
         }
       </div>
+      <div class="mb-8 text-center">
+        <p class="text-base font-semibold tracking-wide uppercase text-primary-700 dark:text-primary-200">What we do</p>
+        <h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-5xl leading-tighter font-heading">Design</h2>
+      </div>
+      <div class="grid items-start gap-6 my-12 justify-items-center lg:grid-cols-3 dark:text-white">
+        {
+          design.map(({ title, description, price }) => (
+            <div class="relative flex flex-col w-full max-w-sm p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
+              <h2 class="mb-4 text-3xl font-bold text-center">{title}</h2>
+              <h2 class="my-4 text-4xl font-bold text-center text-primary-700 dark:text-primary-500">{price}</h2>
+              <div class="flex flex-col">
+                {description.map((item) => (
+                  <p class="flex items-center justify-start py-2 text-gray-500 dark:text-gray-300 text-md">
+                    <Icon name="entypo:dot-single" class="w-8 h-8" />
+                    {item}
+                  </p>
+                  <hr class="w-3/4 mx-auto dark:border-gray-700">
+                ))}
+              </div>
+              <a href={getContactPermalink()} class="mt-12 mb-4 text-xl font-bold text-black btn bg-primary-500 hover:bg-primary-600">Contact Us!</a>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mb-8 text-center">
+        <p class="text-base font-semibold tracking-wide uppercase text-primary-700 dark:text-primary-200">What we do</p>
+        <h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-5xl leading-tighter font-heading">Want something more?</h2>
+      </div>
+      <div class="flex items-start gap-6 my-12 justify-center dark:text-white">
+        {
+          custom.map(({ title, description}) => (
+            <div class="relative flex flex-col w-full max-w-sm p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
+              <h2 class="mb-4 text-3xl font-bold text-center">{title}</h2>
+              <h2 class="my-4 text-4xl font-bold text-center text-primary-700 dark:text-primary-500">Custom prices</h2>
+              <div class="flex flex-col">
+                {description.map((item) => (
+                  <p class="flex items-center justify-start py-2 text-gray-500 dark:text-gray-300 text-md">
+                    <Icon name="entypo:dot-single" class="w-8 h-8" />
+                    {item}
+                  </p>
+                  <hr class="w-3/4 mx-auto dark:border-gray-700">
+                ))}
+              </div>
+              <a href={getContactPermalink()} class="mt-12 mb-4 text-xl font-bold text-black btn bg-primary-500 hover:bg-primary-600">Contact Us!</a>
+            </div>
+          ))
+        }
+      </div>
+
     </div>
   </div>
 </section>
