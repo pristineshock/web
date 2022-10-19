@@ -3,7 +3,7 @@ import Logo from "~/components/atoms/Logo.astro";
 import ToggleTheme from "~/components/core/ToggleTheme.astro";
 import ToggleMenu from "~/components/core/ToggleMenu.astro";
 
-import { getHomePermalink, getPortfolioPermalink, getContactPermalink } from "~/utils/permalinks";
+import { getHomePermalink, getPortfolioPermalink, getBlogPermalink, getContactPermalink } from "~/utils/permalinks";
 ---
 
 <header
@@ -43,6 +43,13 @@ import { getHomePermalink, getPortfolioPermalink, getContactPermalink } from "~/
             class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
             href={getPortfolioPermalink()}
             >Portfolio
+          </a>
+        </li>
+        <li>
+          <a
+            class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
+            href={getBlogPermalink()}
+            >Blog
           </a>
         </li>
         <li>
