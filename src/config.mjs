@@ -40,7 +40,7 @@ export const BLOG = {
 
   post: {
     disabled: false,
-    pathname: "",
+    pathname: "blog",
   },
 
   category: {
