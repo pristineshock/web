@@ -1,7 +1,7 @@
 ---
 pubDate: "Oct 12 2022"
 title: "Why we choose Astro to build our webs?"
-description: "Why we choose these new technology to build our webs?"
+description: "Why we choose this new technology to build our webs?"
 excerpt: "Astro is a new technology recently released. One of the thousands, if I may. But a promising and complete one. So we will talk about why we use it as our base for websites instead of ReactJS or just base HTML."
 image: "~/assets/images/blog/astro-logo.jpg"
 category: "WebDev"
