@@ -30,6 +30,7 @@
   const handleSubmit = async () => {
     try {
       submitting = true;
+      loading = true;
       var formData = new FormData();
       formData.append("name", name);
       formData.append("mail", email);
@@ -54,10 +55,12 @@
       if (parsedJson.messageErr) resMsgErr = parsedJson.messageErr;
       else resMsgErr = null;
       if (parsedJson.captchaErr) resCaptchaErr = parsedJson.captchaErr;
-      else resMsgErr = null;
+      else resCaptchaErr = null;
+      loading = false;
     } catch (error) {
       console.log(error.message);
       submitting = false;
+      loading = false;
     }
   };
 </script>
@@ -87,19 +90,22 @@
           </div>
           <div class="md:w-1/2">
             {#if loading}
-              <div class="py-40 mx-auto fancy-spinner">
-                <div class="spinner-ring" />
-                <div class="spinner-ring" />
-                <div class="spinner-dot" />
+              <div class="flex items-center justify-center py-40">
+                <div class="fancy-spinner">
+                  <div class="spinner-ring" />
+                  <div class="spinner-ring" />
+                  <div class="spinner-dot" />
+                </div>
               </div>
             {/if}
             {#if resSuccess && !loading}
-              <div class="flex items-center justify-center py-40 mx-auto">
-                <p class="text-2xl">
+              <div class="flex flex-col items-center justify-center py-32 mx-auto">
+                <img src="/assets/images/undraw_mail_sent.svg" class="max-w-[10rem]" alt="Success" />
+                <p class="p-6 text-2xl font-bold">
                   {resMsg}
                 </p>
               </div>
-            {:else}
+            {:else if !resSuccess && !loading}
               <form on:submit|preventDefault={handleSubmit} class="flex flex-col items-center max-w-lg px-6 m-auto mt-6 text-left md:mt-0">
                 <input aria-hidden="true" type="hidden" name="bot-field" bind:value={botField} />
                 <div class="w-full my-2">
