@@ -31,6 +31,7 @@
     try {
       submitting = true;
       loading = true;
+
       var formData = new FormData();
       formData.append("name", name);
       formData.append("mail", email);
@@ -42,10 +43,10 @@
       });
 
       let parsedJson = await response.json();
-      console.log(parsedJson);
 
       submitting = false;
       resStatus = parsedJson.status;
+
       if (parsedJson.status == "success") resSuccess = true;
       resMsg = parsedJson.message;
       if (parsedJson.nameErr) resNameErr = parsedJson.nameErr;
@@ -58,7 +59,7 @@
       else resCaptchaErr = null;
       loading = false;
     } catch (error) {
-      console.log(error.message);
+      resMsg = error.message;
       submitting = false;
       loading = false;
     }
