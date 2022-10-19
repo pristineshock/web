@@ -1,14 +1,14 @@
 ---
-import { getHomePermalink } from "~/utils/permalinks.js";
+import { getContactPermalink } from "~/utils/permalinks.js";
 import Picture from "~/components/core/Picture.astro";
 ---
 
-<section id="footer-cta" class="relative w-full mb-10 max-h-[350px] bg-[#8d8c7b] dark:bg-slate-800 overflow-hidden">
+<section id="footer-cta" class="relative w-full mb-10 max-h-[350px] bg-[#b7b5a0] dark:bg-slate-800 overflow-hidden">
   <div class="">
     <Picture
       src={import("~/assets/images/cta_background.png")}
       widths={[1440, 768]}
-      class="w-full mx-auto absolute min-h-[250px]"
+      class="w-full mx-auto absolute pointer-events-none min-h-[250px]"
       alt="cta background"
       aspectRatio="1"
     />
@@ -20,7 +20,7 @@ import Picture from "~/components/core/Picture.astro";
       <h3 class="font-medium tracking-tight md:text-xl">You pay nothing if you don't like your design.</h3>
     </div>
     <div class="text-center md:basis-5/12">
-      <a href={getHomePermalink()} class="px-12 py-2 mb-6 text-xl text-black md:py-3 md:text-2xl btn bg-primary-500 md:m-0 hover:bg-primary-600">
+      <a href={getContactPermalink()} class="px-12 py-2 mb-6 text-xl text-black md:py-3 md:text-2xl btn bg-primary-500 md:m-0 hover:bg-primary-600">
         Write us!
       </a>
     </div>
