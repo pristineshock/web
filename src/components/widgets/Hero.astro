@@ -6,9 +6,9 @@ import { getContactPermalink } from "~/utils/permalinks";
 
 <section>
   <div class="z-10 max-w-5xl px-4 mx-auto sm:px-6">
-    <div class="flex flex-wrap py-12 md:flex-nowrap md:py-20">
-      <div class="pb-10 md:pb-16">
-        <h1 class="text-4xl md:text-[3.50rem] font-bold leading-tight tracking-tighter mb-4 font-heading">
+    <div class="flex flex-col-reverse flex-wrap gap-6 py-12 md:flex-row md:flex-nowrap md:py-20">
+      <div class="pb-10 md:w-7/12 md:pb-16">
+        <h1 class="mb-4 text-5xl font-bold leading-tight tracking-tighter lg:text-6xl font-heading">
           Web Design and Development for small business.
         </h1>
         <div class="max-w-xl">
@@ -27,9 +27,22 @@ import { getContactPermalink } from "~/utils/permalinks";
           </div>
         </div>
       </div>
-      <div>
-        <div class="relative max-w-3xl m-auto mb-8">
-          <Picture src={import("~/assets/images/hero.png")} class="w-full mx-auto" widths={[768, 400]} alt="Hero Image" aspectRatio="10:10" />
+      <div class="md:w-5/12">
+        <div class="relative m-auto mb-8">
+          <Picture
+            src={import("~/assets/images/undraw_working.png")}
+            class="w-full max-w-sm mx-auto md:max-w-2xl dark:hidden"
+            widths={[768, 400]}
+            alt="Hero Image"
+            aspectRatio="256∶183"
+          />
+          <Picture
+            src={import("~/assets/images/undraw_working_dark.png")}
+            class="hidden w-full max-w-sm mx-auto md:max-w-2xl dark:block"
+            widths={[768, 400]}
+            alt="Hero Image"
+            aspectRatio="256∶183"
+          />
         </div>
       </div>
     </div>

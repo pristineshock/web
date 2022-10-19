@@ -30,6 +30,8 @@
   const handleSubmit = async () => {
     try {
       submitting = true;
+      loading = true;
+
       var formData = new FormData();
       formData.append("name", name);
       formData.append("mail", email);
@@ -41,10 +43,10 @@
       });
 
       let parsedJson = await response.json();
-      console.log(parsedJson);
 
       submitting = false;
       resStatus = parsedJson.status;
+
       if (parsedJson.status == "success") resSuccess = true;
       resMsg = parsedJson.message;
       if (parsedJson.nameErr) resNameErr = parsedJson.nameErr;
@@ -54,10 +56,12 @@
       if (parsedJson.messageErr) resMsgErr = parsedJson.messageErr;
       else resMsgErr = null;
       if (parsedJson.captchaErr) resCaptchaErr = parsedJson.captchaErr;
-      else resMsgErr = null;
+      else resCaptchaErr = null;
+      loading = false;
     } catch (error) {
-      console.log(error.message);
+      resMsg = error.message;
       submitting = false;
+      loading = false;
     }
   };
 </script>
@@ -66,96 +70,116 @@
   <script src="//www.google.com/recaptcha/api.js"></script>
   <div class="max-w-6xl px-4 mx-auto sm:px-6">
     <div class="py-12">
-      <div class="max-w-3xl p-6 mx-auto text-center rounded-md shadow-lg dark:shadow-slate-800">
-        <h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-4xl leading-tighter font-heading">Let's talk!</h2>
-        <p class="text-xl text-gray-600 dark:text-slate-400">
-          Don't wait more time. Talk to us. We'll contact you in a moment and begin the process to get you online.
-        </p>
-        {#if loading}
-          <div class="py-40 mx-auto fancy-spinner">
-            <div class="spinner-ring" />
-            <div class="spinner-ring" />
-            <div class="spinner-dot" />
-          </div>
-        {/if}
-        {#if resSuccess && !loading}
-          <div class="flex items-center justify-center py-40 mx-auto">
-            <p class="text-2xl">
-              {resMsg}
+      <div class="max-w-5xl p-6 mx-auto text-center rounded-md shadow-lg dark:shadow-slate-800">
+        <h2 class="mb-8 text-4xl font-bold tracking-tighter md:text-4xl leading-tighter font-heading">Contact Us</h2>
+        <div class="flex flex-col md:flex-row">
+          <div class="flex flex-col items-center gap-6 md:w-1/2">
+            <img src="/assets/images/undraw_contact.svg" class="w-2/3" alt="Contact Us" />
+            <p class="mt-4 text-2xl font-bold tracking-tighter">Completely free consultation</p>
+            <p>
+              Our process begins with a free consultation meeting to chat over ideas and objectives for your website. Your inquiries about our
+              features, costs, and procedures can be addressed by our head designer.
+            </p>
+            <p>Please contact us using the form, and we'll get in touch to arrange your consultation.</p>
+            <p class="mb-6">
+              If you'd rather write to us, you can do so at <a
+                href="mailto:contact@pristineshock.com"
+                class="text-primary-700 dark:text-primary-300 hover:text-primary-800 dark:hover:text-primary-400"
+                target="blank">contact@pristineshock.com</a
+              >.
             </p>
           </div>
-        {:else}
-          <form on:submit|preventDefault={handleSubmit} class="flex flex-col items-center max-w-lg px-6 py-3 m-auto mt-6 text-left">
-            <input aria-hidden="true" type="hidden" name="bot-field" bind:value={botField} />
-            <div class="w-full my-2">
-              <label for="name">Name</label>
-              <input
-                bind:value={name}
-                class="w-full p-2 border rounded dark:border-slate-500 dark:bg-slate-800 dark:text-white"
-                required
-                id="name"
-                placeholder="Name"
-                title="Name"
-                type="text"
-              />
-              {#if resNameErr}
-                <p class="text-sm font-bold text-red-600">{resNameErr}</p>
-              {/if}
-            </div>
-            <div class="w-full my-2">
-              <label for="email">Email</label>
-              <input
-                bind:value={email}
-                class="w-full p-2 border rounded dark:border-slate-500 dark:bg-slate-800 dark:text-white"
-                required
-                id="email"
-                placeholder="blake@example.com"
-                title="Email"
-                type="email"
-              />
-              {#if resMailErr}
-                <p class="text-sm font-bold text-red-600">{resMailErr}</p>
-              {/if}
-            </div>
-            <div class="w-full my-2">
-              <label for="message">Message</label>
-              <textarea
-                bind:value={message}
-                class="w-full p-2 border rounded dark:border-slate-500 dark:bg-slate-800 dark:text-white"
-                required
-                id="message"
-                rows={6}
-                placeholder="Write your message here..."
-                title="Message"
-                type="text"
-              />
-              {#if resMsgErr}
-                <p class="text-sm font-bold text-red-600">{resMsgErr}</p>
-              {/if}
-            </div>
-            <div class="mx-auto my-4">
-              <div class="g-recaptcha" data-sitekey={SITE.googleCaptchaPublicKey} data-callback="toggleCaptcha" />
-              {#if resCaptchaErr}
-                <p class="text-sm font-bold text-red-600">{resCaptchaErr}</p>
-              {/if}
-            </div>
-            {#if resStatus == "failed"}
-              <p class="py-3 text-sm font-bold text-red-600">
-                {resMsg}
-              </p>
-            {/if}
-            {#if !submitting}
-              <div class="w-full my-2 text-center">
-                <button
-                  class="text-lg text-black border btn border-primary-500 bg-primary-500 hover:bg-primary-600 hover:border-primary-600"
-                  type="submit"
-                >
-                  Send</button
-                >
+          <div class="md:w-1/2">
+            {#if loading}
+              <div class="flex items-center justify-center py-40">
+                <div class="fancy-spinner">
+                  <div class="spinner-ring" />
+                  <div class="spinner-ring" />
+                  <div class="spinner-dot" />
+                </div>
               </div>
             {/if}
-          </form>
-        {/if}
+            {#if resSuccess && !loading}
+              <div class="flex flex-col items-center justify-center py-32 mx-auto">
+                <img src="/assets/images/undraw_mail_sent.svg" class="max-w-[10rem]" alt="Success" />
+                <p class="p-6 text-2xl font-bold">
+                  {resMsg}
+                </p>
+              </div>
+            {:else if !resSuccess && !loading}
+              <form on:submit|preventDefault={handleSubmit} class="flex flex-col items-center max-w-lg px-6 m-auto mt-6 text-left md:mt-0">
+                <input aria-hidden="true" type="hidden" name="bot-field" bind:value={botField} />
+                <div class="w-full my-2">
+                  <label for="name">Name</label>
+                  <input
+                    bind:value={name}
+                    class="w-full p-2 border rounded dark:border-slate-500 dark:bg-slate-800 dark:text-white"
+                    required
+                    id="name"
+                    placeholder="Name"
+                    title="Name"
+                    type="text"
+                  />
+                  {#if resNameErr}
+                    <p class="text-sm font-bold text-red-600">{resNameErr}</p>
+                  {/if}
+                </div>
+                <div class="w-full my-2">
+                  <label for="email">Email</label>
+                  <input
+                    bind:value={email}
+                    class="w-full p-2 border rounded dark:border-slate-500 dark:bg-slate-800 dark:text-white"
+                    required
+                    id="email"
+                    placeholder="blake@example.com"
+                    title="Email"
+                    type="email"
+                  />
+                  {#if resMailErr}
+                    <p class="text-sm font-bold text-red-600">{resMailErr}</p>
+                  {/if}
+                </div>
+                <div class="w-full my-2">
+                  <label for="message">Message</label>
+                  <textarea
+                    bind:value={message}
+                    class="w-full p-2 border rounded dark:border-slate-500 dark:bg-slate-800 dark:text-white"
+                    required
+                    id="message"
+                    rows={6}
+                    placeholder="Write your message here..."
+                    title="Message"
+                    type="text"
+                  />
+                  {#if resMsgErr}
+                    <p class="text-sm font-bold text-red-600">{resMsgErr}</p>
+                  {/if}
+                </div>
+                <div class="mx-auto my-4">
+                  <div class="g-recaptcha" data-sitekey={SITE.googleCaptchaPublicKey} data-callback="toggleCaptcha" />
+                  {#if resCaptchaErr}
+                    <p class="text-sm font-bold text-red-600">{resCaptchaErr}</p>
+                  {/if}
+                </div>
+                {#if resStatus == "failed"}
+                  <p class="py-3 text-sm font-bold text-red-600">
+                    {resMsg}
+                  </p>
+                {/if}
+                {#if !submitting}
+                  <div class="w-full my-2 text-center">
+                    <button
+                      class="text-lg text-black border btn border-primary-500 bg-primary-500 hover:bg-primary-600 hover:border-primary-600"
+                      type="submit"
+                    >
+                      Send</button
+                    >
+                  </div>
+                {/if}
+              </form>
+            {/if}
+          </div>
+        </div>
       </div>
     </div>
   </div>
