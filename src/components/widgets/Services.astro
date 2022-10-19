@@ -87,10 +87,10 @@ const items = [
         <p class="text-base font-semibold tracking-wide uppercase text-primary-700 dark:text-primary-200">What we do</p>
         <h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-5xl leading-tighter font-heading">Hosting</h2>
       </div>
-      <div class="grid items-start gap-6 my-12 justify-items-center lg:grid-cols-3 dark:text-white">
+      <div class="flex flex-wrap items-start justify-center gap-6 my-12 dark:text-white">
         {
           hosting.map(({ title, description, price }) => (
-            <div class="relative flex flex-col w-full max-w-sm p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
+            <div class="relative flex flex-col w-[22rem] p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
               <h2 class="mb-4 text-3xl font-bold text-center">{title}</h2>
               <h2 class="my-4 text-4xl font-bold text-center text-primary-700 dark:text-primary-500">{price}<span class="text-sm"> /mo</span></h2>
               <div class="flex flex-col">
@@ -125,10 +125,10 @@ const items = [
         <p class="text-base font-semibold tracking-wide uppercase text-primary-700 dark:text-primary-200">What we do</p>
         <h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-5xl leading-tighter font-heading">Design</h2>
       </div>
-      <div class="grid items-start gap-6 my-12 justify-items-center lg:grid-cols-3 dark:text-white">
+      <div class="flex flex-wrap items-start justify-center gap-6 my-12 dark:text-white">
         {
           design.map(({ title, description, price }) => (
-            <div class="relative flex flex-col w-full max-w-sm p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
+          <div class="relative flex flex-col w-[22rem] p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
               <h2 class="mb-4 text-3xl font-bold text-center">{title}</h2>
               <h2 class="my-4 text-4xl font-bold text-center text-primary-700 dark:text-primary-500">{price}</h2>
               <div class="flex flex-col">
@@ -149,10 +149,10 @@ const items = [
         <p class="text-base font-semibold tracking-wide uppercase text-primary-700 dark:text-primary-200">What we do</p>
         <h2 class="mb-4 text-4xl font-bold tracking-tighter md:text-5xl leading-tighter font-heading">Want something more?</h2>
       </div>
-      <div class="flex items-start gap-6 my-12 justify-center dark:text-white">
+      <div class="flex flex-wrap items-start justify-center gap-6 my-12 dark:text-white">
         {
           custom.map(({ title, description}) => (
-            <div class="relative flex flex-col w-full max-w-sm p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
+          <div class="relative flex flex-col w-[22rem] p-6 transition bg-white rounded shadow-xl dark:bg-slate-900 hover:shadow-lg dark:border dark:border-slate-800">
               <h2 class="mb-4 text-3xl font-bold text-center">{title}</h2>
               <h2 class="my-4 text-4xl font-bold text-center text-primary-700 dark:text-primary-500">Custom prices</h2>
               <div class="flex flex-col">
