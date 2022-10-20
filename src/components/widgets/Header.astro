@@ -7,24 +7,24 @@ import { getHomePermalink, getPortfolioPermalink, getBlogPermalink, getContactPe
 ---
 
 <header
-  class="sticky top-0 z-40 flex-none w-full mx-auto bg-white border-b md:bg-white/90 dark:bg-slate-900 dark:md:bg-slate-900/90 md:backdrop-blur-sm dark:border-b-0"
+  class="sticky top-0 z-40 flex-none w-full mx-auto bg-white border-b lg:bg-white/90 dark:bg-slate-900 dark:lg:bg-slate-900/90 lg:backdrop-blur-sm dark:border-b-0"
 >
-  <div class="w-full max-w-6xl px-3 py-3 mx-auto md:flex md:justify-between md:px-4">
+  <div class="w-full max-w-6xl px-3 py-3 mx-auto lg:flex lg:justify-between lg:px-4">
     <div class="flex justify-between">
       <a class="flex items-center" href={getHomePermalink()}>
         <Logo />
       </a>
-      <div class="flex items-center md:hidden">
+      <div class="flex items-center lg:hidden">
         <ToggleTheme />
         <ToggleMenu />
       </div>
     </div>
     <nav
-      class="items-center hidden w-full h-screen text-gray-600 md:w-auto md:flex dark:text-slate-200 md:h-auto"
+      class="items-center hidden w-full h-screen text-gray-600 lg:w-auto lg:flex dark:text-slate-200 lg:h-auto"
       aria-label="Main navigation"
       id="menu"
     >
-      <ul class="flex flex-col w-full pt-8 text-xl md:pt-0 md:flex-row md:self-center collapse md:w-auto collapsed md:text-base">
+      <ul class="flex flex-col w-full pt-8 text-xl lg:pt-0 lg:flex-row lg:self-center collapse lg:w-auto collapsed lg:text-base">
         <li>
           <a
             class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
@@ -35,6 +35,7 @@ import { getHomePermalink, getPortfolioPermalink, getBlogPermalink, getContactPe
           <a
             class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
             href={getHomePermalink() + "#services"}
+            data-aw-click-menu
             >Services
           </a>
         </li>
@@ -43,6 +44,14 @@ import { getHomePermalink, getPortfolioPermalink, getBlogPermalink, getContactPe
             class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
             href={getPortfolioPermalink()}
             >Portfolio
+          </a>
+        </li>
+        <li>
+          <a
+            class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
+            href={getHomePermalink() + "#faq"}
+            data-aw-click-menu
+            >F.A.Q.
           </a>
         </li>
         <li>
@@ -60,8 +69,8 @@ import { getHomePermalink, getPortfolioPermalink, getBlogPermalink, getContactPe
           </a>
         </li>
       </ul>
-      <div class="flex items-center mb-4 ml-2 md:self-center md:mb-0">
-        <div class="items-center hidden md:flex">
+      <div class="flex items-center mb-4 ml-2 lg:self-center lg:mb-0">
+        <div class="items-center hidden lg:flex">
           <ToggleTheme iconClass="w-5 h-5" />
         </div>
       </div>
