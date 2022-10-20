@@ -56,24 +56,23 @@ const image =
           {
             url: image.toString(),
             alt: ogTitle,
+            type: "imamge/jpeg",
+            width: 1200,
+            height: 628,
           },
         ]
       : undefined,
-    // site_name: 'SiteName',
+    site_name: ogTitle,
+    locale: "es_LA",
   }}
   twitter={{
-    // handle: '@handle',
-    // site: '@site',
     cardType: image ? "summary_large_image" : undefined,
   }}
 />
 
 <Fonts />
 
-<!-- Google Site Verification -->
 {SITE.googleSiteVerificationId && <meta name="google-site-verification" content={SITE.googleSiteVerificationId} />}
-
-<!-- Google Analytics -->
 {SITE.googleAnalyticsId && <GoogleAnalytics id={String(SITE.googleAnalyticsId)} partytown={true} />}
 
 <ExtraMetaTags />
