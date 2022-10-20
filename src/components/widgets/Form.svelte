@@ -18,6 +18,11 @@
   $: submitting = true;
   $: loading = false;
 
+  onMount(() => {
+    window.onloadCallback = onloadCallback;
+    window.toggleCaptcha = toggleCaptcha;
+  });
+
   var onloadCallback = function () {
     grecaptcha.render("captcha", {
       sitekey: SITE.googleCaptchaPublicKey,
@@ -29,11 +34,6 @@
     recaptcha_response = token;
     submitting = false;
   };
-
-  onMount(() => {
-    window.onloadCallback = onloadCallback;
-    window.toggleCaptcha = toggleCaptcha;
-  });
 
   const handleSubmit = async () => {
     try {
