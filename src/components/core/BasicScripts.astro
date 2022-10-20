@@ -2,11 +2,6 @@
 ---
 
 <script is:inline>
-  // Set "light" theme as default
-  // if (!localStorage.theme) {
-  //   localStorage.theme = "light";
-  // }
-
   if (localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
     document.documentElement.classList.add("dark");
   } else {
@@ -43,6 +38,7 @@
       localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
     });
   };
+
   window.onpageshow = function () {
     const elem = document.querySelector("[data-aw-toggle-menu]");
     if (elem) {
