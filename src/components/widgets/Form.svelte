@@ -2,22 +2,6 @@
   import { SITE } from "~/config.mjs";
   import { onMount } from "svelte";
 
-  var recaptcha_response = "";
-  let botField = "";
-  let name = "";
-  let email = "";
-  let message = "";
-
-  let resNameErr = false;
-  let resMailErr = false;
-  let resMsgErr = false;
-  let resCaptchaErr = false;
-  $: resSuccess = false;
-  $: resMsg = null;
-  $: resStatus = null;
-  $: submitting = true;
-  $: loading = false;
-
   onMount(() => {
     window.onloadCallback = onloadCallback;
     window.toggleCaptcha = toggleCaptcha;
@@ -34,6 +18,22 @@
     recaptcha_response = token;
     submitting = false;
   };
+
+  var recaptcha_response = "";
+  let botField = "";
+  let name = "";
+  let email = "";
+  let message = "";
+
+  let resNameErr = false;
+  let resMailErr = false;
+  let resMsgErr = false;
+  let resCaptchaErr = false;
+  $: resSuccess = false;
+  $: resMsg = null;
+  $: resStatus = null;
+  $: submitting = true;
+  $: loading = false;
 
   const handleSubmit = async () => {
     try {
@@ -75,8 +75,6 @@
 </script>
 
 <section class="relative" id="contact">
-  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
-  </script>
   <div class="max-w-6xl px-4 mx-auto sm:px-6">
     <div class="py-12">
       <div class="max-w-5xl p-6 mx-auto text-center rounded-md shadow-lg dark:shadow-slate-800">
@@ -192,6 +190,8 @@
       </div>
     </div>
   </div>
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+  </script>
 </section>
 
 <style>
