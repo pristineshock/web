@@ -18,12 +18,20 @@
   $: submitting = true;
   $: loading = false;
 
+  var onloadCallback = function () {
+    grecaptcha.render("captcha", {
+      sitekey: SITE.googleCaptchaPublicKey,
+      callback: toggleCaptcha,
+    });
+  };
+
   const toggleCaptcha = (token) => {
     recaptcha_response = token;
     submitting = false;
   };
 
   onMount(() => {
+    window.onloadCallback = onloadCallback;
     window.toggleCaptcha = toggleCaptcha;
   });
 
@@ -67,7 +75,8 @@
 </script>
 
 <section class="relative" id="contact">
-  <script src="//www.google.com/recaptcha/api.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+  </script>
   <div class="max-w-6xl px-4 mx-auto sm:px-6">
     <div class="py-12">
       <div class="max-w-5xl p-6 mx-auto text-center rounded-md shadow-lg dark:shadow-slate-800">
@@ -156,7 +165,7 @@
                   {/if}
                 </div>
                 <div class="mx-auto my-4">
-                  <div class="g-recaptcha" data-sitekey={SITE.googleCaptchaPublicKey} data-callback="toggleCaptcha" />
+                  <div id="captcha" />
                   {#if resCaptchaErr}
                     <p class="text-sm font-bold text-red-600">{resCaptchaErr}</p>
                   {/if}
