@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $mailer->send();
     $return["status"] = "success";
-    $return["message"] = "Thank you for sending this message. We will send you a email as soon as possible.";
+    $return["message"] = "Thank you for sending this message. We will send you an email as soon as possible.";
     echo json_encode($return);
   } catch (Exception $e) {
     $return["status"] = "failed";
