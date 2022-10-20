@@ -74,6 +74,10 @@
   };
 </script>
 
+<svelte:head>
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" defer></script>
+</svelte:head>
+
 <section class="relative" id="contact">
   <div class="max-w-6xl px-4 mx-auto sm:px-6">
     <div class="py-12">
@@ -190,8 +194,6 @@
       </div>
     </div>
   </div>
-  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
-  </script>
 </section>
 
 <style>
