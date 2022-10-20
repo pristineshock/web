@@ -4,12 +4,11 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Origin: *");
 
-require_once './config/config.php';
-require_once './vendor/autoload.php';
+require __DIR__ . '/config/config.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
 
 $recaptcha = new \ReCaptcha\ReCaptcha(GOOGLE_CAPTCHA_PRIVATE);
 
@@ -74,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mailer->SMTPAuth   = true;
     $mailer->Username   = MAIL_USER;
     $mailer->Password   = MAIL_PASS;
-    $mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mailer->SMTPSecure = 'tls';
     $mailer->Port       = MAIL_PORT;
 
     $mailer->setFrom(MAIL_FROM, 'PristineShock');
