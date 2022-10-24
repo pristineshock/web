@@ -3,7 +3,7 @@
   import { SITE } from "~/config.mjs";
 
   var cookieConsent = true;
-  var cookiesClass = "hidden fixed bottom-5 left-5 text-white bg-stone-900 opacity-90 backdrop-filter rounded transition";
+  var cookiesClass = "hidden";
 
   onMount(() => {
     attachEvent("[data-toggle-cookies]", "click", function (e) {
@@ -39,12 +39,33 @@
 
 {#if cookieConsent}
   <div class={cookiesClass} id="cookies">
-    <div class="px-8 py-5 text-center text-sm">
-      <p class="pb-4">Cookies sin aceptar {cookieConsent}</p>
-      <button type="button" class="btn p-2 bg-primary-400 text-sm text-black font-md" aria-label="Deny" data-toggle-cookies="disabled"> Deny </button>
-      <button type="button" class="btn p-2 bg-primary-400 text-sm text-black font-md" aria-label="Accept" data-toggle-cookies="enabled">
-        Accept
-      </button>
+    <div
+      class="fixed bottom-0 w-full px-8 py-5 text-sm text-left text-white transition bg-black md:max-w-sm md:bottom-5 md:left-5 opacity-90 backdrop-filter md:rounded"
+    >
+      <header class="pb-2 text-lg font-bold">Cookie Agreement</header>
+      <p class="pb-4 text-sm">
+        We utilize <a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank">Cookies</a> for multiple purposes, including customizing content
+        and monitoring the website performance.
+      </p>
+      <p class="pb-4 text-sm md:pb-8">Collected information is not sold or distributed.</p>
+      <fotter class="flex justify-end gap-6 md:justify-center">
+        <button
+          type="button"
+          class="w-20 p-2 text-sm text-white btn border-primary-400 hover:border-primary-600 font-md"
+          aria-label="Deny"
+          data-toggle-cookies="disabled"
+        >
+          Deny
+        </button>
+        <button
+          type="button"
+          class="w-32 p-2 text-sm text-black btn bg-primary-400 hover:bg-primary-500 font-md"
+          aria-label="Accept"
+          data-toggle-cookies="enabled"
+        >
+          Accept
+        </button>
+      </fotter>
     </div>
   </div>
 {/if}
