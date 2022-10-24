@@ -8,7 +8,7 @@ export const SITE = {
   title: "PristineShock",
   description: "We are a web design and development studio, working with small companies to position them on the web.",
 
-  googleAnalyticsId: false, // or "G-XXXXXXXXXX",
+  googleAnalyticsId: "G-GXVPFK2YN2",
   googleSiteVerificationId: "",
   googleCaptchaPublicKey: "6LfOFpsUAAAAAEY75LBO7BvwkefCPmYS5Gtca9oB",
 

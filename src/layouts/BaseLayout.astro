@@ -3,23 +3,25 @@ import "~/assets/styles/base.css";
 
 import MetaTags from "~/components/core/MetaTags.astro";
 import BasicScripts from "~/components/core/BasicScripts.astro";
+import Cookies from "~/components/widgets/Cookies.svelte";
 
 const { meta = {} } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="motion-safe:scroll-smooth 2xl:text-[20px]">
-	<head>
-		<MetaTags {...meta} />
-	</head>
+  <head>
+    <MetaTags {...meta} />
+  </head>
 
-	<body class="antialiased tracking-tight text-gray-900 bg-white dark:text-slate-200 dark:bg-slate-900">
-		<slot />
-		<BasicScripts />
-		<style is:global>
-			img {
-				content-visibility: auto;
-			}
-		</style>
-	</body>
+  <body class="antialiased tracking-tight text-gray-900 bg-white dark:text-slate-200 dark:bg-slate-900">
+    <slot />
+    <BasicScripts />
+    <style is:global>
+      img {
+        content-visibility: auto;
+      }
+    </style>
+    <Cookies client:load />
+  </body>
 </html>

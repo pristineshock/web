@@ -17,34 +17,33 @@
     }
   }
 
+  function hideNavbar() {
+    const elem = document.querySelector("[data-toggle-menu]");
+    if (elem) {
+      elem.classList.remove("expanded");
+    }
+    document.body.classList.remove("overflow-hidden");
+    document.getElementById("menu")?.classList.add("hidden");
+  }
+
   window.onload = function () {
-    attachEvent("[data-aw-toggle-menu]", "click", function (elem) {
+    attachEvent("[data-toggle-menu]", "click", function (elem) {
       elem.classList.toggle("expanded");
       document.body.classList.toggle("overflow-hidden");
       document.getElementById("menu")?.classList.toggle("hidden");
     });
 
-    attachEvent("[data-aw-click-menu]", "click", function () {
-      const elem = document.querySelector("[data-aw-toggle-menu]");
-      if (elem) {
-        elem.classList.remove("expanded");
-      }
-      document.body.classList.remove("overflow-hidden");
-      document.getElementById("menu")?.classList.add("hidden");
+    attachEvent("[data-click-menu]", "click", function () {
+      hideNavbar();
     });
 
-    attachEvent("[data-aw-toggle-color-scheme]", "click", function () {
+    attachEvent("[data-toggle-color-scheme]", "click", function () {
       document.documentElement.classList.toggle("dark");
       localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
     });
   };
 
   window.onpageshow = function () {
-    const elem = document.querySelector("[data-aw-toggle-menu]");
-    if (elem) {
-      elem.classList.remove("expanded");
-    }
-    document.body.classList.remove("overflow-hidden");
-    document.getElementById("menu")?.classList.add("hidden");
+    hideNavbar();
   };
 </script>
