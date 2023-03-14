@@ -1,0 +1,10 @@
+---
+import { Icon } from "astro-icon";
+import { getPortfolioPermalink } from "~/utils/permalinks";
+---
+
+<div class="mx-auto max-w-3xl px-6 pt-8 pb-12 sm:px-6 md:pt-4 md:pb-20">
+  <a class="btn btn-ghost px-3 md:px-3" href={getPortfolioPermalink()}
+    ><Icon name="tabler:chevron-left" class="mr-1 -ml-1.5 h-5 w-5" /> Back to Portfolio List</a
+  >
+</div>

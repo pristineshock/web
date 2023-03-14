@@ -4,7 +4,12 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Origin: *");
 
-require __DIR__ . '/config/config.php';
+if (isset($_ENV["MAIL_HOST"])) {
+  require __DIR__ . '/config/config.prod.php';
+} else {
+  require __DIR__ . '/config/config.local.php';
+}
+
 require __DIR__ . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;

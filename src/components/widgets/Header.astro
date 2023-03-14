@@ -1,79 +1,126 @@
 ---
-import Logo from "~/components/atoms/Logo.astro";
-import ToggleTheme from "~/components/core/ToggleTheme.astro";
-import ToggleMenu from "~/components/core/ToggleMenu.astro";
+import { Icon } from "astro-icon";
+import Logo from "~/components/Logo.astro";
+import ToggleTheme from "~/components/common/ToggleTheme.astro";
+import ToggleMenu from "~/components/common/ToggleMenu.astro";
 
-import { getHomePermalink, getPortfolioPermalink, getBlogPermalink, getContactPermalink } from "~/utils/permalinks";
+import { getHomePermalink, getAsset } from "~/utils/permalinks";
+
+interface Link {
+  text?: string;
+  href?: string;
+  ariaLabel?: string;
+  icon?: string;
+}
+
+interface ActionLink extends Link {
+  type?: string;
+}
+
+interface MenuLink extends Link {
+  links?: Array<Link>;
+}
+
+export interface Props {
+  links?: Array<MenuLink>;
+  actions?: Array<ActionLink>;
+  isSticky?: boolean;
+  showToggleTheme?: boolean;
+  showRssFeed?: boolean;
+  position?: string;
+}
+
+const { links = [], actions = [], isSticky = false, showToggleTheme = false, showRssFeed = false, position = "center" } = Astro.props;
 ---
 
 <header
-  class="sticky top-0 z-40 flex-none w-full mx-auto bg-white border-b lg:bg-white/90 dark:bg-slate-900 dark:lg:bg-slate-900/90 lg:backdrop-blur-sm dark:border-b-0"
+  class:list={[{ sticky: isSticky, relative: !isSticky }, "top-0 z-40 flex-none mx-auto w-full transition-all ease-in duration-100"]}
+  id="header"
 >
-  <div class="w-full max-w-6xl px-3 py-3 mx-auto lg:flex lg:justify-between lg:px-4">
-    <div class="flex justify-between">
+  <div class="mx-auto w-full max-w-7xl py-3 px-3 lg:flex lg:justify-between lg:py-3.5 lg:px-4">
+    <div class:list={[{ "mr-auto": position === "right" }, "flex justify-between"]}>
       <a class="flex items-center" href={getHomePermalink()}>
         <Logo />
       </a>
       <div class="flex items-center lg:hidden">
-        <ToggleTheme />
+        {showToggleTheme && <ToggleTheme />}
         <ToggleMenu />
       </div>
     </div>
     <nav
-      class="items-center hidden w-full h-screen text-gray-600 lg:w-auto lg:flex dark:text-slate-200 lg:h-auto"
+      class="hidden h-[calc(100vh-72px)] w-full items-center overflow-y-auto dark:text-slate-200 lg:mx-5 lg:flex lg:h-auto lg:w-auto lg:overflow-visible"
       aria-label="Main navigation"
-      id="menu"
     >
-      <ul class="flex flex-col w-full pt-8 text-xl lg:pt-0 lg:flex-row lg:self-center collapse lg:w-auto collapsed lg:text-base">
-        <li>
-          <a
-            class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
-            href={getHomePermalink()}>Home</a
-          >
-        </li>
-        <li>
-          <a
-            class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
-            href={getHomePermalink() + "#services"}
-            data-click-menu
-            >Services
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
-            href={getPortfolioPermalink()}
-            >Portfolio
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
-            href={getHomePermalink() + "#faq"}
-            data-click-menu
-            >F.A.Q.
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
-            href={getBlogPermalink()}
-            >Blog
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
-            href={getContactPermalink()}
-            >Contact
-          </a>
-        </li>
+      <ul class="flex w-full flex-col pt-8 text-xl lg:w-auto lg:flex-row lg:self-center lg:pt-0 lg:text-base">
+        {
+          links.map(({ text, href, links }) => (
+            <li class={links?.length ? "dropdown" : ""}>
+              {links?.length ? (
+                <>
+                  <button class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white">
+                    {text} <Icon name="tabler:chevron-down" class="ml-0.5 hidden h-3.5 w-3.5 lg:inline" />
+                  </button>
+                  <ul class="dropdown-menu dark:lg:bg-dark rounded pl-4 font-medium drop-shadow-xl lg:absolute lg:hidden lg:min-w-[200px] lg:bg-white/90 lg:pl-0 lg:backdrop-blur-md">
+                    {links.map(({ text: text2, href: href2 }) => (
+                      <li>
+                        <a
+                          class="whitespace-no-wrap block py-2 px-5 first:rounded-t last:rounded-b dark:hover:bg-gray-700 lg:hover:bg-gray-200"
+                          href={href2}
+                        >
+                          {text2}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a
+                  class="flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-gray-900 dark:hover:text-white"
+                  href={href}
+                >
+                  {text}
+                </a>
+              )}
+            </li>
+          ))
+        }
       </ul>
-      <div class="flex items-center mb-4 ml-2 lg:self-center lg:mb-0">
-        <div class="items-center hidden lg:flex">
-          <ToggleTheme iconClass="w-5 h-5" />
-        </div>
-      </div>
     </nav>
+    <div class:list={[{ "ml-auto": position === "left" }, "lg:self-center flex items-center lg:mb-0"]}>
+      <div class="hidden items-center lg:flex">
+        {showToggleTheme && <ToggleTheme iconClass="w-5 h-5" />}
+
+        {
+          showRssFeed && (
+            <a
+              class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+              aria-label="RSS Feed"
+              href={getAsset("/rss.xml")}
+            >
+              <Icon name="tabler:rss" class="h-5 w-5" />
+            </a>
+          )
+        }
+        {
+          actions?.length ? (
+            <span class="ml-4">
+              {actions.map(({ text, href, type }) => (
+                <a
+                  class:list={[
+                    "btn ml-2 py-2.5 px-5.5 lg:px-6 font-semibold shadow-none text-sm",
+                    { "btn-ghost": type === "ghost", "btn-primary": type === "primary" },
+                  ]}
+                  href={href}
+                >
+                  <Fragment set:html={text} />
+                </a>
+              ))}
+            </span>
+          ) : (
+            ""
+          )
+        }
+      </div>
+    </div>
   </div>
 </header>

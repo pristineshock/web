@@ -1,0 +1,89 @@
+---
+import { Icon } from "astro-icon";
+import { Picture } from "@astrojs/image/components";
+
+interface Item {
+  title: string;
+  description?: string;
+  icon?: string;
+}
+
+export interface Props {
+  title?: string;
+  id?: string;
+  items: Array<Item>;
+  image?: string | any; // TODO: find HTMLElementProps
+}
+
+const { title = await Astro.slots.render("title"), items = [], id, image = await Astro.slots.render("image") } = Astro.props;
+---
+
+<section class="mx-auto max-w-6xl scroll-m-16 px-4 py-16 sm:px-6 lg:px-8 lg:py-20" id={id}>
+  <div class="row-gap-10 grid gap-6 md:grid-cols-2">
+    <div class="mb-4 md:mb-0 md:py-4 md:pr-16">
+      {title && <h2 class="font-heading mb-8 text-3xl font-bold lg:text-4xl" set:html={title} />}
+      <div class="relative px-12 md:hidden">
+        {
+          image &&
+            (typeof image === "string" ? (
+              <Fragment set:html={image} />
+            ) : (
+              <Picture
+                class="object-topshadow-lg mb-8 w-full rounded-md bg-gray-400 object-cover dark:bg-slate-700"
+                widths={[400, 768]}
+                sizes="(max-width: 768px) 100vw, 432px"
+                aspectRatio="768:432"
+                width={432}
+                height={768}
+                {...image}
+              />
+            ))
+        }
+      </div>
+      {
+        items &&
+          items.length &&
+          items.map(({ title, description, icon }, index) => (
+            <div class="flex">
+              <div class="mr-4 flex flex-col items-center">
+                <div>
+                  {index !== items.length - 1 ? (
+                    <div class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-yellow-600 dark:border-yellow-700">
+                      {icon && <Icon name={icon} class="h-6 w-6 text-yellow-600 dark:text-slate-200" />}
+                    </div>
+                  ) : (
+                    <div class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-yellow-600 bg-yellow-600 dark:border-yellow-700 dark:bg-yellow-700">
+                      <Icon name={icon} class="h-6 w-6 text-white dark:text-slate-200" />
+                    </div>
+                  )}
+                </div>
+                <div class="h-full w-px bg-gray-300 dark:bg-slate-500" />
+              </div>
+              <div class={`pt-1 ${index !== items.length - 1 ? "pb-8" : ""}`}>
+                {title && <p class="mb-2 text-xl font-bold dark:text-slate-300" set:html={title} />}
+                {description && <p class="text-muted text-sm dark:text-slate-400" set:html={description} />}
+              </div>
+            </div>
+          ))
+      }
+    </div>
+    <div class="relative hidden md:block">
+      {
+        image &&
+          (typeof image === "string" ? (
+            <Fragment set:html={image} />
+          ) : (
+            <Picture
+              class="inset-0 w-full rounded-md bg-gray-400 object-cover object-top shadow-lg dark:bg-slate-700 md:absolute md:h-full"
+              widths={[400, 768]}
+              sizes="(max-width: 768px) 100vw, 432px"
+              aspectRatio="432:768"
+              width={432}
+              height={768}
+              {...image}
+            />
+          ))
+      }
+    </div>
+  </div>
+</section>

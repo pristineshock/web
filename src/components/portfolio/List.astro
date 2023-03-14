@@ -1,15 +1,22 @@
 ---
 import Item from "~/components/portfolio/ListItem.astro";
+import type { Portfolio } from "~/types";
 
-const { works } = Astro.props;
+export interface Props {
+  portfolios: Array<Portfolio>;
+}
+
+const { portfolios } = Astro.props;
 ---
 
-<ul class="grid md:grid-cols-2">
+<ul class="flex flex-wrap items-start justify-center gap-12">
   {
-    works.map((work) => (
-      <li class="mb-10 md:mb-16">
-        <Item work={work} />
-      </li>
+    portfolios.map((portfolio) => (
+      <>
+        <li class="w-full max-w-sm">
+          <Item portfolio={portfolio} />
+        </li>
+      </>
     ))
   }
 </ul>

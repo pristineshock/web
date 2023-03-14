@@ -1,0 +1,38 @@
+---
+import { PORTFOLIO } from "~/config.mjs";
+
+import Layout from "~/layouts/PageLayout.astro";
+import SinglePortfolio from "~/components/portfolio/SinglePortfolio.astro";
+import ToPortfolioLink from "~/components/portfolio/ToPortfolioLink.astro";
+
+import { getCanonical, getPermalink } from "~/utils/permalinks";
+import { fetchPortfolios } from "~/utils/portfolio";
+import { findImage } from "~/utils/images";
+
+export async function getStaticPaths() {
+  if (PORTFOLIO?.disabled || PORTFOLIO?.portfolio?.disabled) return [];
+  return (await fetchPortfolios()).map((portfolio) => ({
+    params: {
+      portfolio: portfolio.permalink,
+    },
+    props: { portfolio },
+  }));
+}
+
+const { portfolio } = Astro.props;
+const url = getCanonical(getPermalink(portfolio.permalink, "work", "portfolio"));
+
+const meta = {
+  title: portfolio.title,
+  description: portfolio.description,
+  canonical: portfolio.canonical || url,
+  image: await findImage(portfolio.image),
+  noindex: PORTFOLIO?.portfolio?.noindex,
+  ogType: "article",
+};
+---
+
+<Layout {meta}>
+  <SinglePortfolio portfolio={{ ...portfolio }} url={url} />
+  <ToPortfolioLink />
+</Layout>

@@ -24,6 +24,6 @@ pnpm-lock.yaml
 
 */Dockerfile
 
-public/api/config/
+public/api/config/config.local.php
 public/api/vendor/
 

@@ -1,11 +1,19 @@
 ---
-import Layout from '~/layouts/BaseLayout.astro';
-import { SITE } from '~/config.mjs';
-import Error404 from '~/components/widgets/Error404.astro';
+import Layout from "~/layouts/BaseLayout.astro";
+import { getHomePermalink } from "~/utils/permalinks";
 
-const title = `Error 404 — ${SITE.name}`;
+const title = `Error 404`;
 ---
 
 <Layout meta={{ title }}>
-	<Error404 />
+  <section class="container mx-auto flex h-screen items-center justify-center">
+    <div class="flex h-screen flex-col items-center justify-center">
+      <h2 class="-mt-16 mb-8 text-9xl font-bold">
+        <span class="sr-only">Error</span>
+        <span class="text-yellow-500">404</span>
+      </h2>
+      <p class="mb-8 text-3xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
+      <a rel="noopener noreferrer" href={getHomePermalink()} class="btn btn-primary">Back to homepage</a>
+    </div>
+  </section>
 </Layout>

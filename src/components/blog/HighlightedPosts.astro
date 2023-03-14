@@ -1,41 +1,43 @@
 ---
-import Picture from "~/components/core/Picture.astro";
+import Grid from "~/components/blog/Grid.astro";
 
-import { findPostsByIds } from "~/utils/posts";
-import { findImage } from "~/utils/images";
-import { getPermalink } from "~/utils/permalinks";
+import { getBlogPermalink } from "~/utils/permalinks";
+import { findPostsByIds } from "~/utils/blog";
 
-const ids = ["why-we-choose-astro", "why-is-google-lightouse-so-important"];
+export interface Props {
+  title?: string;
+  allPostsText?: string;
+  allPostsLink?: string | URL;
+  information?: string;
+  postIds: string[];
+}
 
-const items = await Promise.all((await findPostsByIds(ids)).map(async (item) => ({ ...item, image: await findImage(item.image) })));
+const {
+  title = await Astro.slots.render("title"),
+  allPostsText = "View all posts",
+  allPostsLink = getBlogPermalink(),
+  information = await Astro.slots.render("information"),
+  postIds = [],
+} = Astro.props;
+
+const posts = await findPostsByIds(postIds);
 ---
 
-<section class="max-w-6xl px-4 py-16 mx-auto lg:py-20">
-  <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-center sm:text-4xl sm:leading-none font-heading">Some highlights of our Blog</h2>
+<section class="mx-auto max-w-7xl px-4 py-16 lg:py-20">
+  <div class="mb-8 flex flex-col lg:flex-row lg:justify-between">
+    <div class="md:max-w-sm">
+      {title && <h2 class="font-heading group mb-2 text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none" set:html={title} />}
+      {
+        allPostsText && allPostsLink && (
+          <a class="text-muted hover:text-primary mb-6 block transition duration-200 ease-in dark:text-slate-400 md:mb-0" href={allPostsLink}>
+            {allPostsText} »
+          </a>
+        )
+      }
+    </div>
 
-  <div class="grid gap-6 row-gap-5 -mb-6 md:grid-cols-2">
-    {
-      items.map((post) => (
-        <article class="mb-6 transition">
-          <Picture
-            src={post.image}
-            class="object-cover w-full h-64 mb-6 bg-gray-400 rounded shadow-lg dark:bg-slate-700"
-            widths={[400, 900]}
-            sizes="(max-width: 900px) 400px, 900px"
-            alt={post.title}
-            aspectRatio="16:9"
-          />
-          <h3 class="mb-2 text-xl font-bold leading-snug sm:text-2xl font-heading">
-            <a
-              href={getPermalink(post.slug, "post")}
-              class="underline transition duration-200 ease-in hover:text-primary-600 underline-offset-4 decoration-1 decoration-dotted"
-            >
-              {post.title}
-            </a>
-          </h3>
-          <p class="text-gray-700 dark:text-gray-400">{post.description}</p>
-        </article>
-      ))
-    }
+    {information && <p class="text-muted dark:text-slate-400 lg:max-w-md lg:text-sm" set:html={information} />}
   </div>
+
+  <Grid posts={posts} />
 </section>
