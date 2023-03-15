@@ -25,7 +25,7 @@ const CONFIG = {
 
   socialLinks: true,
   github: "https://github.com/pristineshock",
-  linkedin: "https://www.linkedin.com/in/matias-facello/",
+  linkedin: "#",
   instagram: "#",
   facebook: "#",
   twitter: "#",

@@ -65,11 +65,10 @@ export const footerData = {
       href: getPermalink("/contact"),
     },
   ],
-  // secondaryLinks: [ ],
   socialLinks: [
-    { ariaLabel: "Linkedin", icon: "tabler:brand-linkedin", href: SITE.linkedin },
     { ariaLabel: "Github", icon: "tabler:brand-github", href: SITE.github },
     { ariaLabel: "RSS", icon: "tabler:rss", href: getAsset("/rss.xml") },
+    // { ariaLabel: "Linkedin", icon: "tabler:brand-linkedin", href: SITE.linkedin },
     // { ariaLabel: "Twitter", icon: "tabler:brand-twitter", href: SITE.twitter },
     // { ariaLabel: "Instagram", icon: "tabler:brand-instagram", href: SITE.instagram },
     // { ariaLabel: "Facebook", icon: "tabler:brand-facebook", href: SITE.facebook },
