@@ -1,0 +1,14 @@
+---
+import Item from "~/components/portfolio/GridItem.astro";
+import type { Portfolio } from "~/types";
+
+export interface Props {
+  portfolios: Array<Portfolio>;
+}
+
+const { portfolios } = Astro.props;
+---
+
+<div class="row-gap-5 -mb-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+  {portfolios.map((portfolio) => <Item portfolio={portfolio} />)}
+</div>

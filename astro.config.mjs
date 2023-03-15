@@ -7,15 +7,22 @@ import image from "@astrojs/image";
 import partytown from "@astrojs/partytown";
 import { SITE } from "./src/config.mjs";
 import svelte from "@astrojs/svelte";
+import compress from "astro-compress";
+import mdx from "@astrojs/mdx";
+import { readingTimeRemarkPlugin } from "./src/utils/frontmatter.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const whenExternalScripts = (items = []) => (SITE.googleAnalyticsId ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : []);
 
 // https://astro.build/config
 export default defineConfig({
-  // Astro uses this full URL to generate your sitemap and canonical URLs in your final build
   site: SITE.origin,
   base: SITE.basePathname,
+  trailingSlash: SITE.trailingSlash ? "always" : "never",
   output: "static",
+  markdown: {
+    remarkPlugins: [readingTimeRemarkPlugin],
+  },
   integrations: [
     tailwind({
       config: {
@@ -23,14 +30,28 @@ export default defineConfig({
       },
     }),
     sitemap(),
-    image(),
-    /* Disable this integration if you don't use Google Analytics (or other external script). */
-    partytown({
-      config: {
-        forward: ["dataLayer.push"],
-      },
+    image({
+      serviceEntryPoint: "@astrojs/image/sharp",
     }),
+    ...whenExternalScripts(() =>
+      partytown({
+        config: {
+          forward: ["dataLayer.push"],
+        },
+      })
+    ),
     svelte(),
+    compress({
+      css: true,
+      html: {
+        removeAttributeQuotes: false,
+      },
+      img: false,
+      js: true,
+      svg: false,
+      logger: 1,
+    }),
+    mdx(),
   ],
   vite: {
     resolve: {

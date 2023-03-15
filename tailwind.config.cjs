@@ -1,13 +1,14 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors");
+// const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
       colors: {
-        primary: colors.yellow,
-        secondary: colors.red,
+        primary: "var(--aw-color-primary)",
+        secondary: "var(--aw-color-secondary)",
+        accent: "var(--aw-color-accent)",
       },
       fontFamily: {
         sans: ["'InterVariable'", ...defaultTheme.fontFamily.sans],

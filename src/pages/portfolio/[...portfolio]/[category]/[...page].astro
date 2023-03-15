@@ -1,0 +1,49 @@
+---
+import { SITE, PORTFOLIO } from "~/config.mjs";
+
+import Layout from "~/layouts/PageLayout.astro";
+import PortfolioList from "~/components/portfolio/List.astro";
+import Headline from "~/components/portfolio/Headline.astro";
+import Pagination from "~/components/portfolio/Pagination.astro";
+
+import { fetchPortfolios } from "~/utils/portfolio";
+import { CATEGORY_BASE } from "~/utils/permalinks";
+
+export async function getStaticPaths({ paginate }) {
+  if (PORTFOLIO?.disabled || PORTFOLIO?.category?.disabled) return [];
+
+  const portfolios = await fetchPortfolios();
+  const categories = new Set();
+  portfolios.map((portfolio) => {
+    typeof portfolio.category === "string" && categories.add(portfolio.category.toLowerCase());
+  });
+
+  return Array.from(categories).map((category: string) =>
+    paginate(
+      portfolios.filter((portfolio) => typeof portfolio.category === "string" && category === portfolio.category.toLowerCase()),
+      {
+        params: { category: category, portfolio: CATEGORY_BASE || undefined },
+        pageSize: PORTFOLIO.portfoliosPerPage,
+        props: { category },
+      }
+    )
+  );
+}
+
+const { page, category } = Astro.props;
+
+const currentPage = page.currentPage ?? 1;
+const meta = {
+  title: `Works by Category: ${category} ${currentPage > 1 ? ` — Page ${currentPage}` : ""}`,
+  description: SITE.description,
+  noindex: PORTFOLIO?.category?.noindex,
+};
+---
+
+<Layout meta={meta}>
+  <section class="mx-auto max-w-4xl px-6 py-12 sm:px-6 sm:py-16 lg:py-20">
+    <Headline>Works by Category: <span class="capitalize">{category.replaceAll("-", " ")}</span></Headline>
+    <PortfolioList portfolios={page.data} />
+    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+  </section>
+</Layout>

@@ -1,0 +1,37 @@
+---
+import { SITE, PORTFOLIO } from "~/config.mjs";
+
+import Layout from "~/layouts/PageLayout.astro";
+import PortfolioList from "~/components/portfolio/List.astro";
+import Headline from "~/components/portfolio/Headline.astro";
+import Pagination from "~/components/portfolio/Pagination.astro";
+
+import { fetchPortfolios } from "~/utils/portfolio";
+import { PORTFOLIO_BASE } from "~/utils/permalinks";
+
+export async function getStaticPaths({ paginate }) {
+  if (PORTFOLIO?.disabled || PORTFOLIO?.list?.disabled) return [];
+  return paginate(await fetchPortfolios(), {
+    params: { portfolio: PORTFOLIO_BASE || undefined },
+    pageSize: PORTFOLIO.portfoliosPerPage,
+  });
+}
+
+const { page } = Astro.props;
+const currentPage = page.currentPage ?? 1;
+
+const meta = {
+  title: `Portfolio ${currentPage > 1 ? ` — Page ${currentPage}` : ""}`,
+  description: SITE.description,
+  noindex: PORTFOLIO?.list?.noindex || currentPage > 1,
+  ogType: "portfolio",
+};
+---
+
+<Layout {meta}>
+  <section class="mx-auto max-w-4xl px-6 py-12 sm:px-6 sm:py-16 lg:py-20">
+    <Headline>Our Works</Headline>
+    <PortfolioList portfolios={page.data} />
+    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+  </section>
+</Layout>

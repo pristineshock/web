@@ -1,55 +1,98 @@
-export const SITE = {
+import defaultImage from "./assets/images/default.jpg";
+
+const CONFIG = {
   name: "PristineShock",
 
   origin: "https://www.pristineshock.com",
   basePathname: "/",
-  contactPathname: "contact",
+  trailingSlash: false,
 
   title: "PristineShock",
   description: "We are a web design and development studio, working with small companies to position them on the web.",
+  defaultImage: defaultImage,
+
+  defaultTheme: "system", // Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+
+  language: "en",
+  textDirection: "ltr",
+
+  dateFormatter: new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  }),
+
+  socialLinks: true,
+  github: "https://github.com/pristineshock",
+  linkedin: "#",
+  instagram: "#",
+  facebook: "#",
+  twitter: "#",
 
   googleAnalyticsId: "G-GXVPFK2YN2",
   googleSiteVerificationId: "",
   googleCaptchaPublicKey: "6LfOFpsUAAAAAEY75LBO7BvwkefCPmYS5Gtca9oB",
 
-  // SOCIAL LINKS
-  socialLinks: false,
-  github: "#",
-  linkedin: "#",
-  instagram: "#",
-  twitter: "#",
-};
-
-export const PORTFOLIO = {
-  disabled: false,
-  worksPerPage: 8,
+  categoryPathname: "category",
+  tagPathname: "tag",
 
   portfolio: {
-    pathname: "portfolio",
-  },
-};
+    disabled: false,
+    portfoliosPerPage: 8,
 
-export const BLOG = {
-  disabled: false,
-  postsPerPage: 4,
+    portfolio: {
+      permalink: "/%slug%", // Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
+      noindex: false,
+      disabled: false,
+    },
+
+    list: {
+      pathname: "list", // Portfolio main path, you can change this to "articles" (/articles)
+      noindex: false,
+      disabled: false,
+    },
+
+    tag: {
+      noindex: true,
+      disabled: false,
+    },
+
+    category: {
+      noindex: true,
+      disabled: false,
+    },
+  },
 
   blog: {
     disabled: false,
-    pathname: "blog",
-  },
+    postsPerPage: 4,
 
-  post: {
-    disabled: false,
-    pathname: "blog",
-  },
+    post: {
+      permalink: "%slug%", // Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
+      noindex: false,
+      disabled: false,
+    },
 
-  category: {
-    disabled: false,
-    pathname: "category",
-  },
+    list: {
+      pathname: "list", // Blog main path, you can change this to "articles" (/articles)
+      noindex: false,
+      disabled: false,
+    },
 
-  tag: {
-    disabled: false,
-    pathname: "tag",
+    category: {
+      noindex: true,
+      disabled: false,
+    },
+
+    tag: {
+      noindex: true,
+      disabled: false,
+    },
   },
 };
+
+export const SITE = { ...CONFIG, blog: undefined };
+export const PORTFOLIO = CONFIG.portfolio;
+export const BLOG = CONFIG.blog;
+export const DATE_FORMATTER = CONFIG.dateFormatter;

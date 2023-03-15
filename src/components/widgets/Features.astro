@@ -1,0 +1,62 @@
+---
+import { Icon } from "astro-icon";
+import { getPermalink } from "~/utils/permalinks";
+
+
+interface Item {
+  title: string;
+  description: string[];
+  price?: string;
+  icon?: string;
+}
+
+export interface Props {
+  title?: string;
+  id?: string;
+  subtitle?: string;
+  highlight?: string;
+  description?: string;
+  items: Array<Item>;
+}
+
+const { title = await Astro.slots.render("title"), id, subtitle = await Astro.slots.render("subtitle"), highlight, items = [] } = Astro.props;
+---
+
+<section class="scroll-mt-16 bg-yellow-50 dark:bg-inherit" id={id}>
+  <div class="mx-auto max-w-6xl px-4 py-8 lg:px-8 lg:py-12 ">
+    {
+      (title || subtitle || highlight) && (
+        <div class="mb-10 max-w-3xl text-center md:mx-auto md:mb-12">
+          {highlight && <p class="text-yellow text-base font-semibold uppercase tracking-wide dark:text-blue-200" set:html={highlight} />}
+          {title && <h2 class="leading-tighter font-heading mb-4 text-4xl font-bold tracking-tighter md:text-5xl" set:html={title} />}
+
+          {subtitle && <p class="text-muted mx-auto max-w-3xl text-xl dark:text-slate-400 sm:text-center" set:html={subtitle} />}
+        </div>
+      )
+    }
+    <div class="mx-auto">
+      <div class="flex flex-wrap items-start justify-center gap-6 my-12 dark:text-white">
+        {items.map(({ title, description, price }) => (
+          <div class="relative flex flex-col w-80 p-6 transition bg-white dark:bg-slate-700 rounded shadow-xl hover:shadow-lg dark:border dark:border-slate-800 hover:scale-105">
+            <h2 class="mb-4 text-3xl font-bold text-center">{title}</h2>
+            {price && <h2 class="my-4 text-4xl font-bold text-center text-yellow-700 dark:text-yellow-500">{price}<span class="text-sm"> /mo</span></h2>}
+            <div class="flex flex-col">
+              {description.map((item) => (
+                <p class="flex items-center justify-start py-2 text-gray-600 dark:text-gray-300 text-md">
+                  <Icon name="entypo:dot-single" class="w-8 h-8" />
+                  {item}
+                </p>
+                <hr class="w-3/4 mx-auto dark:border-gray-500">
+              ))}
+            </div>
+            <div class="mx-auto mt-6 max-w-xs">
+              <a class="btn btn-primary w-full sm:w-auto" href={getPermalink("/contact")} target="_blank" rel="noopener">
+                Contact Us!
+              </a>
+            </div>
+          </div>
+          ))}
+        </div>
+    </div>
+  </div>
+</section>

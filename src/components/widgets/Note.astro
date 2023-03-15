@@ -1,0 +1,17 @@
+---
+export interface Props {
+  title?: string;
+  text?: string;
+  icon?: string;
+  extraMargin?: boolean;
+}
+
+const { title = await Astro.slots.render("title"), text = await Astro.slots.render("text"), extraMargin } = Astro.props;
+---
+
+<section class={`bg-amber-200 dark:bg-slate-700 ${extraMargin && "my-12"}`}>
+  <div class="text-md mx-auto max-w-6xl px-4 py-4 text-center font-medium sm:px-6">
+    {title && <span class="font-bold" set:html={title} />}
+    {text && <span set:html={text} />}
+  </div>
+</section>

@@ -1,49 +1,80 @@
 ---
 import { Icon } from "astro-icon";
-import Picture from "~/components/core/Picture.astro";
-import { getContactPermalink } from "~/utils/permalinks";
+import { Picture } from "@astrojs/image/components";
+import imageHero from "~/assets/images/pexels-christina-morillo-1181673.jpg";
+
+interface CallToAction {
+  text: string;
+  href: string;
+  icon?: string;
+}
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  callToAction?: string | CallToAction;
+  callToAction2?: string | CallToAction;
+  image?: string | any; // TODO: find HTMLElementProps
+  imageDark?: string | any; // TODO: find HTMLElementProps
+}
+
+const {
+  title = await Astro.slots.render("title"),
+  subtitle = await Astro.slots.render("subtitle"),
+  content = await Astro.slots.render("content"),
+  callToAction = await Astro.slots.render("callToAction"),
+} = Astro.props;
 ---
 
-<section>
-  <div class="z-10 max-w-5xl px-4 mx-auto sm:px-6">
-    <div class="flex flex-col-reverse flex-wrap gap-6 py-12 md:flex-row md:flex-nowrap md:py-20">
-      <div class="pb-10 md:w-7/12 md:pb-16">
-        <h1 class="mb-4 text-5xl font-bold leading-tight tracking-tighter lg:text-6xl font-heading">
-          Web Design and Development for small businesses.
-        </h1>
-        <div class="max-w-xl">
-          <p class="mb-8 text-xl text-gray-600 dark:text-slate-400">
-            Custom web building for anyone on the web. We provide the best service and attention to detail for reasonable pricing.
-          </p>
-          <div class="flex gap-4 max-w-none flex-nowrap">
-            <div class="flex w-full sm:w-auto">
-              <a
-                class="w-full text-black border btn border-primary-500 bg-primary-500 hover:bg-primary-600 hover:border-primary-600 sm:mb-0"
-                href={getContactPermalink()}
-              >
-                <Icon name="ic:round-email" class="w-5 h-5 mr-2 -ml-1.5" /> Contact Us
-              </a>
-            </div>
+<section class="relative py-8">
+  <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-black blur-[1px]">
+    <Picture
+      src={imageHero}
+      alt="Hero background"
+      class="pointer-events-none z-0 opacity-40"
+      sizes="(max-width: 800px) 800px, (max-width: 1200px) 1400px, 1920px"
+      fit="cover"
+      position={"bottom"}
+      widths={[800, 1400, 1920]}
+    />
+  </div>
+  <div class="container mx-auto px-4 sm:px-6">
+    <div
+      class="flex flex-col-reverse flex-wrap items-start justify-center gap-6 py-12 px-12 md:max-w-lg md:flex-row md:flex-nowrap md:py-20 lg:max-w-2xl"
+    >
+      <div class="z-20 mx-auto md:pb-16">
+        {
+          title && (
+            <h1
+              class="leading-tighter font-heading mb-4 text-3xl font-bold tracking-tighter text-amber-400 sm:text-4xl lg:text-5xl"
+              set:html={title}
+            />
+          )
+        }
+        <div class="">
+          {subtitle && <p class="mb-6 text-base font-medium text-slate-200 sm:text-xl" set:html={subtitle} />}
+          <div class="m-auto flex flex-col flex-nowrap gap-4 md:flex-row md:justify-start">
+            {
+              callToAction && (
+                <div class="flex w-full md:w-auto">
+                  {typeof callToAction === "string" ? (
+                    <Fragment set:html={callToAction} />
+                  ) : (
+                    <a class="btn btn-primary w-full sm:mb-0" href={callToAction?.href} target="_blank" rel="noopener">
+                      {callToAction?.icon && (
+                        <>
+                          <Icon name={callToAction.icon} class="mr-1 -ml-1.5 h-5 w-5" />{" "}
+                        </>
+                      )}
+                      {callToAction?.text}
+                    </a>
+                  )}
+                </div>
+              )
+            }
           </div>
         </div>
-      </div>
-      <div class="md:w-5/12">
-        <div class="relative m-auto mb-8">
-          <Picture
-            src={import("~/assets/images/undraw_working.png")}
-            class="w-full max-w-sm mx-auto md:max-w-2xl dark:hidden"
-            widths={[768, 400]}
-            alt="Hero Image"
-            aspectRatio="256∶183"
-          />
-          <Picture
-            src={import("~/assets/images/undraw_working_dark.png")}
-            class="hidden w-full max-w-sm mx-auto md:max-w-2xl dark:block"
-            widths={[768, 400]}
-            alt="Hero Image"
-            aspectRatio="256∶183"
-          />
-        </div>
+        {content && <Fragment set:html={content} />}
       </div>
     </div>
   </div>

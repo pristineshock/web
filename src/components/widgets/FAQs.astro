@@ -1,103 +1,53 @@
 ---
 import { Icon } from "astro-icon";
 
-const items = [
-  [
-    {
-      question: "Why choose Pristine Shock Web Studio?",
-      answer:
-        "We love our work, and maybe we are a little biased, but it is a good one compared to international standards. But for us, our real winner is our customer service. We ensure you get the best value by delivering high-quality and high-performant websites at an affordable price.",
-    },
-    {
-      question: "What services do you provide?",
-      answer:
-        "Our principal strength is designing and building websites, and we supervise them. We host them on the web and keep them working flawlessly. We also develop custom applications if that is appropriate for your case. We also do logos and design in general, SEO, marketing, blogging, or maintenance. But we assure you, your web won't be a problem for you when we are involved.",
-    },
-    {
-      question: "How long does it take to build a website?",
-      answer:
-        "On average, websites launch within 2 to 8 weeks from project start, ranging from project to project. If you need the website at a specific deadline, talk to us so we check what we can do to meet your target, but we usually take our time to make sure our work is meeting our standards.",
-    },
-    {
-      question: "Do I need separate web hosting?",
-      answer:
-        "On average, websites launch within 2 to 8 weeks from project start, ranging from project to project. If you need the website at a specific deadline, talk to us so we check what we can do to meet your target, but we usually take our time to make sure our work is meeting our standards.",
-    },
-    {
-      question: "Do your websites work well on mobile devices (responsive)?",
-      answer:
-        "We design with the mobile-first methodology, so our sites will always be responsive and work on small screens like phones or tablets. We put a high emphasis on making sure our website experience is second-to-none. If you find our site is not working as it should, just let us know, and we will solve it as soon as possible, at no charge.",
-    },
-    {
-      question: "Do your plans include search engine optimization (SEO)?",
-      answer:
-        "Our websites go through rigorous optimization for SEO. This process ensures search engines can easily read and rank the website. Depending on the business and the competition, this may be enough to get you on the first page of the most popular search engines, even the top spots. Others may need additional specialized SEO services, but sometimes one must be realistic with the expectations of their position in Google.",
-    },
-  ],
-  [
-    {
-      question: "Do I own the website?",
-      answer:
-        "You are the only owner of your website design. Our websites are built in HTML and can transfer to most web hosts. We like you to stay with us because you want to, not because you have to.",
-    },
-    {
-      question: "Am I bonded to a contract?",
-      answer:
-        "Not exactly. You are free to cancel at any time. If you want to move your website from our servers before a year of service, you must pay for the remaining time of the contract. (this contains the amortization of the initial design & build cost).",
-    },
-    {
-      question: "Are there any additional fees?",
-      answer:
-        "Our plans include the cost of a domain, development, hosting, and management. No additional fees are going to be charged by us to keep the website running. Some packages include mail, but in others, you must purchase the service yourself if you need it or upgrade the current package.",
-    },
-    {
-      question: "Can you help me finish my incomplete website?",
-      answer:
-        "We are sorry, but we can't help you. We follow an extensive method of design made to provide you with a product that meets your expectations and ours too. However, we can look through it and use it as inspiration or a guideline for the new project.",
-    },
-    {
-      question: "Do you offer a satisfaction guarantee & warranty?",
-      answer:
-        "When we start a new project, we do the design and then develop it. The hours of work on the base design are part of the subscription value, but we only make the contract after you agree on the draft. We consider that if you liked our first design, you are already satisfied with us. If you don't like the design or think that working with us may not be the best decision, you can pull out anytime before we start to develop the website free of charge.",
-    },
-    {
-      question: "Can I upgrade, downgrade, or cancel at any time?",
-      answer:
-        "Yes, you can upgrade at any point. A downgrade is also possible at any point after a year. You can cancel anytime, but you must pay the remaining cost of the contract. After a year, we will work as a subscription service where you can cancel anytime.",
-    },
-    {
-      question: "I have a question, but it is not here. How can I talk to you?",
-      answer:
-        "Look for the contact form! Talk to us, and we will talk to you about our process and assure you don't have any doubts. Maybe we can make you a draft to see if you like our work! I'm pretty confident we will make you a client!",
-    },
-  ],
-];
+interface Item {
+  question: string;
+  answer: string;
+}
+
+export interface Props {
+  title?: string;
+  id?: string;
+  subtitle?: string;
+  highlight?: string;
+  items: Array<Array<Item>>;
+}
+
+const { title = await Astro.slots.render("title"), id, subtitle = await Astro.slots.render("subtitle"), highlight, items = [] } = Astro.props;
 ---
 
-<section id="faq" class="px-4 scroll-mt-16 py-16 mx-auto max-w-6xl lg:py-20">
+<section class="mx-auto max-w-6xl scroll-mt-16 px-4 py-16 lg:py-20" id={id}>
   <div class="max-w-xl sm:mx-auto lg:max-w-2xl">
-    <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-      <h2 class="max-w-lg mb-4 text-3xl font-bold leading-none tracking-tight sm:text-4xl md:mx-auto font-heading">Frequently Asked Questions</h2>
-    </div>
+    {
+      (title || subtitle || highlight) && (
+        <div class="mb-10 max-w-xl md:mx-auto md:mb-12 md:text-center lg:max-w-2xl">
+          {highlight && <p class="text-primary text-base font-semibold uppercase tracking-wide dark:text-blue-200" set:html={highlight} />}
+          {title && (
+            <h2 class="font-heading mb-4 max-w-lg text-3xl font-bold leading-none sm:text-4xl md:mx-auto md:tracking-tight" set:html={title} />
+          )}
+          {subtitle && <p class="text-muted mx-auto max-w-3xl text-xl dark:text-slate-400" set:html={subtitle} />}
+        </div>
+      )
+    }
   </div>
-  <div class="max-w-screen-xl sm:mx-auto">
-    <div class="grid grid-cols-1 gap-x-8 gap-y-8 lg:gap-x-16 md:grid-cols-2">
+  <div class="max-w-7xl sm:mx-auto">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-2 lg:gap-x-16">
       {
-        items.map((subitems) => (
-          <div class="space-y-8">
-            {subitems.map(({ question, answer }) => (
-              <div>
-                <p class="mb-4 text-xl font-bold">
-                  <Icon name="tabler:arrow-down-right" class="w-7 h-7 text-primary-500 inline-block icon-bold" />
-                  {question}
-                </p>
-                {answer.split("\n\n").map((paragraph) => (
-                  <p class="text-gray-700 dark:text-gray-400 mb-2" set:html={paragraph} />
-                ))}
-              </div>
-            ))}
-          </div>
-        ))
+        items &&
+          items.map((subitems) => (
+            <div class="space-y-8">
+              {subitems.map(({ question, answer }) => (
+                <div>
+                  <h3 class="mb-4 text-xl font-bold">
+                    <Icon name="tabler:arrow-down-right" class="inline-block h-7 w-7 text-yellow-500" />
+                    {question}
+                  </h3>
+                  {answer && <div class="text-muted dark:text-gray-400" set:html={answer} />}
+                </div>
+              ))}
+            </div>
+          ))
       }
     </div>
   </div>

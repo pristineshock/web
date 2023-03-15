@@ -1,0 +1,49 @@
+---
+import { SITE, PORTFOLIO } from "~/config.mjs";
+
+import Layout from "~/layouts/PageLayout.astro";
+import PortfolioList from "~/components/portfolio/List.astro";
+import Pagination from "~/components/portfolio/Pagination.astro";
+
+import { fetchPortfolios } from "~/utils/portfolio";
+import { TAG_BASE } from "~/utils/permalinks";
+import Headline from "~/components/portfolio/Headline.astro";
+
+export async function getStaticPaths({ paginate }) {
+  if (PORTFOLIO?.disabled || PORTFOLIO?.tag?.disabled) return [];
+
+  const portfolios = await fetchPortfolios();
+  const tags = new Set();
+  portfolios.map((post) => {
+    Array.isArray(post.tags) && post.tags.map((tag) => tags.add(tag.toLowerCase()));
+  });
+
+  return Array.from(tags).map((tag: string) =>
+    paginate(
+      portfolios.filter((post) => Array.isArray(post.tags) && post.tags.find((elem) => elem.toLowerCase() === tag)),
+      {
+        params: { tag: tag, portfolio: TAG_BASE || undefined },
+        pageSize: PORTFOLIO.portfoliosPerPage,
+        props: { tag },
+      }
+    )
+  );
+}
+
+const { page, tag } = Astro.props;
+
+const currentPage = page.currentPage ?? 1;
+const meta = {
+  title: `Works by tag: ${tag} ${currentPage > 1 ? ` — Page ${currentPage} ` : ""}`,
+  description: SITE.description,
+  noindex: PORTFOLIO?.tag?.noindex,
+};
+---
+
+<Layout meta={meta}>
+  <section class="mx-auto max-w-4xl px-6 py-12 sm:px-6 sm:py-16 lg:py-20">
+    <Headline>Works by Tag: {tag}</Headline>
+    <PortfolioList portfolios={page.data} />
+    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+  </section>
+</Layout>
