@@ -63,7 +63,7 @@ const link = !BLOG?.post?.disabled ? getPermalink(post.permalink, "post", "blog"
       <h2 class="font-heading mb-2 text-xl font-bold leading-tight dark:text-slate-300 sm:text-2xl">
         {
           link ? (
-            <a class="hover:text-primary transition duration-200 ease-in dark:hover:text-blue-700" href={link}>
+            <a class="transition duration-200 ease-in hover:text-yellow-700 dark:hover:text-yellow-600" href={link}>
               {post.title}
             </a>
           ) : (
