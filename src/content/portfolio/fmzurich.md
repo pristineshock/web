@@ -1,7 +1,7 @@
 ---
 pubDate: 2022-10-12T09:30:00Z
 title: "FM Zurich"
-category: "Branding"
+category: "Website"
 description: "Radio FM website with news feeds."
 location: "Entre Rios, Argentina"
 industry: "Media, Radio communication"

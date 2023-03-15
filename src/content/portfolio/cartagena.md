@@ -1,7 +1,7 @@
 ---
 publishDate: 2022-10-15T09:30:00Z
 title: "Cartagena"
-category: "Website"
+category: "Branding"
 description: "Logo and boards for a food store."
 location: "Entre Rios, Argentina"
 industry: "Shop, Food Services"
