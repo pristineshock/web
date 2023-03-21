@@ -19,18 +19,20 @@ const image = await findImage(portfolio.imageSocial);
   <div class="relative mb-6 rounded bg-gray-400 shadow-lg dark:bg-slate-700">
     {
       image && (
-        <Picture
-          src={image}
-          class="w-full rounded bg-gray-400 shadow-lg dark:bg-slate-700 md:h-full md:w-auto md:object-cover"
-          widths={[400, 900]}
-          width={400}
-          height={224}
-          sizes="(max-width: 900px) 400px, 900px"
-          alt={portfolio.title}
-          aspectRatio="3:2"
-          loading="lazy"
-          decoding="async"
-        />
+        <a href={getPermalink(portfolio.permalink, "work", "portfolio")}>
+          <Picture
+            src={image}
+            class="w-full rounded bg-gray-400 shadow-lg dark:bg-slate-700 md:h-full md:w-auto md:object-cover"
+            widths={[400, 900]}
+            width={400}
+            height={224}
+            sizes="(max-width: 900px) 400px, 900px"
+            alt={portfolio.title}
+            aspectRatio="3:2"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
       )
     }
   </div>
