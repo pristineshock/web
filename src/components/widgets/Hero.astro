@@ -29,11 +29,12 @@ const {
 <section class="relative py-8">
   <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-black blur-[1px]">
     <Picture
-      src={imageHero}
+      src={imageHero.src}
       alt="Hero background"
       class="pointer-events-none z-0 opacity-40"
       sizes="(max-width: 800px) 800px, (max-width: 1200px) 1400px, 1920px"
       fit="cover"
+      aspectRatio={1920 / 2876}
       position={"bottom"}
       widths={[800, 1400, 1920]}
     />
