@@ -104,14 +104,15 @@ const { links = [], actions = [], isSticky = false, showToggleTheme = false, sho
         {
           actions?.length ? (
             <span class="ml-4">
-              {actions.map(({ text, href, type }) => (
+              {actions.map(({ text, href, type, icon }) => (
                 <a
                   class:list={[
-                    "btn ml-2 py-2.5 px-5.5 lg:px-6 font-semibold shadow-none text-sm",
+                    "btn ml-2 py-3 px-4 font-semibold shadow-none text-sm",
                     { "btn-ghost": type === "ghost", "btn-primary": type === "primary" },
                   ]}
                   href={href}
                 >
+                  {icon && <Icon name={icon} class="mr-2 h-4 w-4" />}
                   <Fragment set:html={text} />
                 </a>
               ))}

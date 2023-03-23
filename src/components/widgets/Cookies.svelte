@@ -54,18 +54,12 @@
       <fotter class="flex justify-end gap-6 md:justify-center">
         <button
           type="button"
-          class="btn font-md w-20 border-2 border-yellow-400 p-2 text-sm text-white hover:border-yellow-600 hover:bg-black"
+          class="btn font-md w-20 border-2 border-yellow-400 p-2 text-sm text-white hover:border-yellow-600 hover:bg-black dark:border-yellow-400 dark:hover:border-yellow-600 dark:hover:bg-gray-900 dark:hover:text-white"
           on:click|preventDefault={() => setCookie("disabled")}
         >
           Deny
         </button>
-        <button
-          type="button"
-          class="btn font-md w-32 bg-yellow-400 p-2 text-sm text-black hover:bg-yellow-500"
-          on:click|preventDefault={() => setCookie("enabled")}
-        >
-          Accept
-        </button>
+        <button type="button" class="btn font-md btn-primary  w-32 p-2 text-sm" on:click|preventDefault={() => setCookie("enabled")}> Accept </button>
       </fotter>
     </div>
   </div>

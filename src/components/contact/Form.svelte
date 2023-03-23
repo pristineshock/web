@@ -87,7 +87,7 @@
         <h2 class="leading-tighter font-heading mb-8 text-4xl font-bold tracking-tighter md:text-4xl">Contact Us</h2>
         <div class="flex flex-col md:flex-row">
           <div class="flex flex-col items-center gap-6 md:w-1/2">
-            <img src={imageContact} class="w-2/3" alt="Contact Us" />
+            <img src={imageContact.src} class="w-2/3" alt="Contact Us" />
             <p class="mt-4 text-2xl font-bold tracking-tighter">Completely free consultation</p>
             <p>
               Our process begins with a free consultation meeting to chat over ideas and objectives for your website. Your inquiries about our
@@ -114,7 +114,7 @@
             {/if}
             {#if resSuccess && !loading}
               <div class="mx-auto flex flex-col items-center justify-center py-32">
-                <img src={imageSuccess} class="max-w-[10rem]" alt="Success" />
+                <img src={imageSuccess.src} class="max-w-[10rem]" alt="Success" />
                 <p class="p-6 text-2xl font-bold text-yellow-600 dark:text-yellow-500">
                   {resMsg}
                 </p>
