@@ -28,6 +28,7 @@ export const headerData = {
       href: getPermalink("/contact"),
     },
   ],
+  actions: [{ type: "primary", text: "Get a quote!", href: getPermalink("/contact"), icon: "ic:round-email" }],
 };
 
 export const footerData = {
